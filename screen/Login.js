@@ -121,7 +121,6 @@ const Login = ({ navigation }) => {
   }
 
   return (
-    
     <>
       <StatusBar style="grey" />
       <Container>
