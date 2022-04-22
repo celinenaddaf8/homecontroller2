@@ -6,11 +6,16 @@ import {
   KeyboardAvoidingView,
   Platform,
   ImageBackground,
-} from 'react-native'
+  View,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import styled from 'styled-components/native'
 
 import Header from '../components/Header'
 import { auth, db } from '../firebase'
+
+import { AntDesign, Entypo } from "@expo/vector-icons";
 
 const Container = styled.ScrollView`
   flex: 1;
@@ -30,33 +35,56 @@ const Form = styled.KeyboardAvoidingView`
   width: 90%;
   background-color: orange;
   flex-direction: column;
-  border-radius: 20px;
   padding: 20px;
   justify-content: center;
-`
+  border-radius: 15px;
+`;
 
 const SubmitForm = styled.TouchableOpacity`
   width: 95%;
   height: 50px;
   color: white;
-  border-radius: 10px;
   border: none;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
   background-color: grey;
-`
-
-const Input = styled.TextInput`
-  width: 95%;
-  height: 50px;
-  border: none;
-  padding: 10px;
   border-radius: 15px;
-  background-color: #333333;
-  color: white;
-  margin-top: 10px;
-`
+`;
+
+const StyledTextInput = styled.TextInput`
+  background-color: white;
+  padding: 15px;
+  padding-left: 55px;
+  padding-right: 55px;
+  font-size: 16px;
+  border-radius: 15px;
+  height: 60px;
+  margin-vertical: 3px;
+  margin-bottom: 10px;
+  color: gray;
+`;
+
+const StyledInputLabel = styled.Text`
+  color: gray;
+  font-size: 13px;
+  text-align: left;
+`;
+const LeftIcon = styled.View`
+  left: 15px;
+  top: 38px;
+  position: absolute;
+  z-index: 1;
+`;
+
+const RightIcon = styled.TouchableOpacity`
+  right: 15px;
+  top: 38px;
+  position: absolute;
+  z-index: 1;
+`;
+
+
 
 const ButtonText = styled.Text`
   font-size: 15px;
@@ -94,6 +122,8 @@ const Login = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [hidePassword, setHidePassword ] = useState(true)
+  
 
   const login = () => {
     setLoading(true)
@@ -121,7 +151,6 @@ const Login = ({ navigation }) => {
   }
 
   return (
-    
     <>
       <StatusBar style="grey" />
       <Container>
@@ -130,25 +159,33 @@ const Login = ({ navigation }) => {
           <FormWrapper>
             <Form>
               <SignInText>Sign In</SignInText>
-              <Input
+              <MyTextInput
+                label="Email Address"
+                icon="idcard"
                 placeholder="Enter your email"
                 placeholderTextColor="grey"
                 value={email}
                 onChangeText={(text) => setEmail(text)}
+                keyboardType="email-address"
               />
-              <Input
+              <MyTextInput
+                label="Password"
+                icon="lock"
                 placeholder="Password"
                 placeholderTextColor="grey"
-                secureTextEntry
+                secureTextEntry={hidePassword}
+                isPassword={true}
+                hidePassword={hidePassword}
+                setHidePassword={setHidePassword}
                 value={password}
                 onChangeText={(text) => setPassword(text)}
               />
               <SubmitForm onPress={login} disabled={loading}>
-                <ButtonText>{loading ? 'Loading...' : 'Sign In'}</ButtonText>
+                <ButtonText>{loading ? "Loading..." : "Sign In"}</ButtonText>
               </SubmitForm>
               <NewToAppWrapper
                 activeOpacity={0.5}
-                onPress={() => navigation.navigate('Register')}
+                onPress={() => navigation.navigate("Register")}
               >
                 <NewToApp>New to our App ? Sign Up</NewToApp>
               </NewToAppWrapper>
@@ -157,7 +194,35 @@ const Login = ({ navigation }) => {
         </Overlay>
       </Container>
     </>
-  )
+  );
 }
+
+const MyTextInput = ({
+  label,
+  isPassword,
+  icon,
+  hidePassword,
+  setHidePassword,
+  ...props}
+) => {
+  return(
+  <View>
+    <LeftIcon>
+      <AntDesign name={icon} size={24} color="grey" />
+    </LeftIcon>
+    <StyledInputLabel>{label}</StyledInputLabel>
+    <StyledTextInput {...props} />
+    {isPassword && (
+      <RightIcon onPress={() => setHidePassword (!hidePassword)}>
+        <Entypo
+          name={hidePassword ? "eye-with-line" : "eye"}
+          size={24}
+          color="grey"
+        />
+      </RightIcon>
+    )}
+  </View>);
+};
+
 
 export default Login

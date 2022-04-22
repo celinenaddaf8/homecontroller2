@@ -5,8 +5,10 @@ import {
   Text,
   KeyboardAvoidingView,
   ImageBackground,
+  View
 } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
+import { AntDesign, Entypo } from "@expo/vector-icons";
 import styled from 'styled-components/native'
 
 import Header from '../components/Header'
@@ -22,16 +24,16 @@ const FormWrapper = styled.KeyboardAvoidingView`
   width: 100%;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  height: 600px;
 `
 
 const Form = styled.KeyboardAvoidingView`
-  height: 400px;
+  height: 600px;
   width: 90%;
   background-color: orange;
   flex-direction: column;
   border-radius: 20px;
-  padding: 20px;
+  padding: 10px;
   justify-content: center;
 `
 
@@ -102,15 +104,49 @@ const HalfInput = styled.TextInput`
   border: none;
   padding: 10px;
   border-radius: 15px;
-  background-color: #333333;
-  color: white;
+  background-color: white;
+  color: grey;
   margin-right: 5px;
   margin-top: 10px;
   &:focus {
     background-color: #454545;
   }
 `
+const StyledTextInput = styled.TextInput`
+  background-color: white;
+  padding: 15px;
+  padding-left: 55px;
+  padding-right: 55px;
+  font-size: 16px;
+  height: 60px;
+  border-radius: 15px;
+  color: grey;
+  margin-right: 5px;
+  margin-top: 10px;
+  &:focus {
+    background-color: grey;
+  }
+`;
 
+const StyledInputLabel = styled.Text`
+  color: gray;
+  font-size: 13px;
+  text-align: left;
+  padding-top: 5px;
+`;
+const LeftIcon = styled.View`
+  left: 15px;
+  top: 48px;
+  position: absolute;
+  z-index: 1;
+`;
+
+const RightIcon = styled.TouchableOpacity`
+  right: 15px;
+  top: 48px;
+  position: absolute;
+  z-index: 1;
+`;
 const InputsWrapper = styled.View`
   flex-direction: column;
   justify-content: center;
@@ -122,17 +158,29 @@ const Register = ({ navigation }) => {
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPass,setConfirmPass] = useState('')
   const [loading, setLoading] = useState(false)
+  const [hidePassword, setHidePassword] = useState(true);
+  const [hideConfirmPass, setHideConfirmPass] = useState(true);
 
   const register = () => {
     setLoading(true)
-    if (!email || !password || !firstName || !lastName) {
-      alert('All fields are mandatory')
-      setPassword('')
-      setEmail('')
-      setLoading(false)
-      return
+    if (!email || !password || !firstName || !lastName || !confirmPass) {
+      alert("All fields are mandatory");
+      setPassword("");
+      setEmail("");
+      setLoading(false);
     }
+    if (confirmPass != password){
+      alert ("Passwords do NOT match");
+      setPassword("");
+      setEmail("");
+      setConfirmPass("");
+      setLoading(false);
+
+    }  
+      return
+    
 
     auth
       .createUserWithEmailAndPassword(email, password)
@@ -166,7 +214,7 @@ const Register = ({ navigation }) => {
           <Header login={false} />
           <FormWrapper>
             <Form>
-              <KeyboardAvoidingView style={{ width: '100%' }}>
+              <KeyboardAvoidingView style={{ width: "100%" }}>
                 <SignInText>Sign Up</SignInText>
                 <InputsWrapper>
                   <HalfInputWrapper>
@@ -183,27 +231,48 @@ const Register = ({ navigation }) => {
                       onChangeText={(text) => setLastName(text)}
                     />
                   </HalfInputWrapper>
-                  <Input
-                    placeholderTextColor="grey"
+                  <MyTextInput
+                    label="Email Address"
+                    icon="idcard"
                     placeholder="Enter your email"
+                    placeholderTextColor="grey"
                     value={email}
                     onChangeText={(text) => setEmail(text)}
+                    keyboardType="email-address"
                   />
-                  <Input
-                    placeholderTextColor="grey"
+                  <MyTextInput
+                    label="Password"
+                    icon="lock"
                     placeholder="Password"
+                    placeholderTextColor="grey"
+                    secureTextEntry={hidePassword}
+                    isPassword={true}
+                    hidePassword={hidePassword}
+                    setHidePassword={setHidePassword}
                     value={password}
-                    secureTextEntry
                     onChangeText={(text) => setPassword(text)}
                   />
+                  <MyTextInput
+                    label="Confirm Your Password"
+                    icon="lock"
+                    placeholder="Confirm Password"
+                    placeholderTextColor="grey"
+                    secureTextEntry={hideConfirmPass}
+                    isPassword={true}
+                    hidePassword={hideConfirmPass}
+                    setHidePassword={setHideConfirmPass}
+                    value={confirmPass}
+                    onChangeText={(text) => setConfirmPass(text)}
+                  />
+
                   <SubmitForm onPress={register} disabled={loading}>
                     <ButtonText>
-                      {loading ? 'Loading...' : 'Sign Up'}
+                      {loading ? "Loading..." : "Sign Up"}
                     </ButtonText>
                   </SubmitForm>
                   <NewToApp
                     activeOpacity={0.5}
-                    onPress={() => navigation.navigate('Login')}
+                    onPress={() => navigation.navigate("Login")}
                   >
                     <NewToApp>Already have an account ? Sign In</NewToApp>
                   </NewToApp>
@@ -214,7 +283,33 @@ const Register = ({ navigation }) => {
         </Overlay>
       </Container>
     </>
-  )
+  );
 }
-
+const MyTextInput = ({
+  label,
+  isPassword,
+  icon,
+  hidePassword,
+  setHidePassword,
+  ...props
+}) => {
+  return (
+    <View>
+      <LeftIcon>
+        <AntDesign name={icon} size={24} color="grey" />
+      </LeftIcon>
+      <StyledInputLabel>{label}</StyledInputLabel>
+      <StyledTextInput {...props} />
+      {isPassword && (
+        <RightIcon onPress={() => setHidePassword(!hidePassword)}>
+          <Entypo
+            name={hidePassword ? "eye-with-line" : "eye"}
+            size={24}
+            color="grey"
+          />
+        </RightIcon>
+      )}
+    </View>
+  );
+};
 export default Register
