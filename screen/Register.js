@@ -13,29 +13,32 @@ import styled from 'styled-components/native'
 
 import Header from '../components/Header'
 import { auth, db } from '../firebase'
+import { color } from 'react-native-reanimated';
 
 const Container = styled.ScrollView`
   flex: 1;
-  background-color: gray;
+  background-color: white;
 `
 
 const FormWrapper = styled.KeyboardAvoidingView`
-  background-color: gray;
+  background-color: white;
   width: 100%;
   justify-content: center;
   align-items: center;
-  height: 600px;
+  height: 655px;
 `
 
 const Form = styled.KeyboardAvoidingView`
   height: 600px;
   width: 90%;
-  background-color: orange;
+  background-color: white;
   flex-direction: column;
   border-radius: 20px;
   padding: 10px;
   justify-content: center;
-`
+  border: 4px #f4a460;
+
+`;
 
 const SubmitForm = styled.TouchableOpacity`
   width: 95%;
@@ -46,19 +49,8 @@ const SubmitForm = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  background-color: grey;
-`
-
-const Input = styled.TextInput`
-  width: 95%;
-  height: 50px;
-  border: none;
-  padding: 10px;
-  border-radius: 15px;
-  background-color: #333333;
-  color: white;
-  margin-top: 10px;
-`
+  background-color: #f4a460;
+`;
 
 const ButtonText = styled.Text`
   font-size: 15px;
@@ -69,7 +61,7 @@ const ButtonText = styled.Text`
 const SignInText = styled.Text`
   font-size: 30px;
   font-weight: bold;
-  color: white;
+  color: #f4a460;
   margin: 10px;
   text-align: left;
 `
@@ -82,7 +74,7 @@ const NewToApp = styled.Text`
   font-size: 15px;
   font-weight: 500;
   text-align: center;
-  color: #ccc;
+  color: gray;
   margin: 15px;
   text-align: center;
 `
@@ -94,9 +86,9 @@ const Overlay = styled.View`
 
 const HalfInputWrapper = styled.View`
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-`
+`;
 
 const HalfInput = styled.TextInput`
   width: 45.8%;
@@ -108,10 +100,8 @@ const HalfInput = styled.TextInput`
   color: grey;
   margin-right: 5px;
   margin-top: 10px;
-  &:focus {
-    background-color: #454545;
-  }
-`
+  border: 1px #ccc;
+`;
 const StyledTextInput = styled.TextInput`
   background-color: white;
   padding: 15px;
@@ -123,9 +113,7 @@ const StyledTextInput = styled.TextInput`
   color: grey;
   margin-right: 5px;
   margin-top: 10px;
-  &:focus {
-    background-color: grey;
-  }
+  border: 1px #ccc;
 `;
 
 const StyledInputLabel = styled.Text`
@@ -150,8 +138,11 @@ const RightIcon = styled.TouchableOpacity`
 const InputsWrapper = styled.View`
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-`
+
+`;
+const NameText = styled.Text`
+  color: grey
+`;
 
 const Register = ({ navigation }) => {
   const [firstName, setFirstName] = useState('')
@@ -218,12 +209,16 @@ const Register = ({ navigation }) => {
                 <SignInText>Sign Up</SignInText>
                 <InputsWrapper>
                   <HalfInputWrapper>
+                    <NameText>First Name</NameText>
                     <HalfInput
                       placeholderTextColor="grey"
                       placeholder="First Name"
                       value={firstName}
                       onChangeText={(text) => setFirstName(text)}
                     />
+                  </HalfInputWrapper>
+                  <HalfInputWrapper>
+                    <NameText>Last Name</NameText>
                     <HalfInput
                       placeholderTextColor="grey"
                       placeholder="Last Name"

@@ -19,11 +19,11 @@ import { AntDesign, Entypo } from "@expo/vector-icons";
 
 const Container = styled.ScrollView`
   flex: 1;
-  background-color: gray;
+  background-color: white;
 `
 
 const FormWrapper = styled.KeyboardAvoidingView`
-  background-color: gray;
+  background-color: white;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -33,11 +33,14 @@ const FormWrapper = styled.KeyboardAvoidingView`
 const Form = styled.KeyboardAvoidingView`
   height: 400px;
   width: 90%;
-  background-color: orange;
+  background-color: white;;
   flex-direction: column;
   padding: 20px;
   justify-content: center;
   border-radius: 15px;
+  border:4px #f4a460;
+  
+  }
 `;
 
 const SubmitForm = styled.TouchableOpacity`
@@ -48,7 +51,7 @@ const SubmitForm = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  background-color: grey;
+  background-color: #f4a460;
   border-radius: 15px;
 `;
 
@@ -63,6 +66,7 @@ const StyledTextInput = styled.TextInput`
   margin-vertical: 3px;
   margin-bottom: 10px;
   color: gray;
+  border: 1px #ccc;
 `;
 
 const StyledInputLabel = styled.Text`
@@ -84,18 +88,24 @@ const RightIcon = styled.TouchableOpacity`
   z-index: 1;
 `;
 
-
+const WelcomeText = styled.Text`
+  font-size: 16px;
+  color: gray;
+  margin: 10px;
+  text-align: left;
+  top:10px
+`;
 
 const ButtonText = styled.Text`
   font-size: 15px;
   font-weight: bold;
   padding-left: 5px;
   color: white;
-`
+`;
 const SignInText = styled.Text`
   font-size: 30px;
   font-weight: bold;
-  color: white;
+  color: #f4a460;
   margin: 10px;
   text-align: left;
 `
@@ -108,7 +118,7 @@ const NewToApp = styled.Text`
   font-size: 15px;
   font-weight: 500;
   text-align: center;
-  color: #ccc;
+  color: gray;
   margin: 15px;
   text-align: center;
 `
@@ -152,12 +162,13 @@ const Login = ({ navigation }) => {
 
   return (
     <>
-      <StatusBar style="grey" />
+      <StatusBar style="white" />
       <Container>
         <Overlay>
           <Header login={false} />
           <FormWrapper>
             <Form>
+              <WelcomeText>Welcome to Home Controller !</WelcomeText>
               <SignInText>Sign In</SignInText>
               <MyTextInput
                 label="Email Address"
