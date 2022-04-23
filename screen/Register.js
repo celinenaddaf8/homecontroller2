@@ -5,15 +5,15 @@ import {
   Text,
   KeyboardAvoidingView,
   ImageBackground,
-  View
+  View,
 } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import { AntDesign, Entypo } from "@expo/vector-icons";
+import { AntDesign, Entypo } from '@expo/vector-icons'
 import styled from 'styled-components/native'
 
 import Header from '../components/Header'
 import { auth, db } from '../firebase'
-import { color } from 'react-native-reanimated';
+import { color } from 'react-native-reanimated'
 
 const Container = styled.ScrollView`
   flex: 1;
@@ -37,8 +37,7 @@ const Form = styled.KeyboardAvoidingView`
   padding: 10px;
   justify-content: center;
   border: 4px #f4a460;
-
-`;
+`
 
 const SubmitForm = styled.TouchableOpacity`
   width: 95%;
@@ -50,7 +49,7 @@ const SubmitForm = styled.TouchableOpacity`
   align-items: center;
   margin-top: 20px;
   background-color: #f4a460;
-`;
+`
 
 const ButtonText = styled.Text`
   font-size: 15px;
@@ -88,7 +87,7 @@ const HalfInputWrapper = styled.View`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-`;
+`
 
 const HalfInput = styled.TextInput`
   width: 45.8%;
@@ -101,7 +100,7 @@ const HalfInput = styled.TextInput`
   margin-right: 5px;
   margin-top: 10px;
   border: 1px #ccc;
-`;
+`
 const StyledTextInput = styled.TextInput`
   background-color: white;
   padding: 15px;
@@ -114,64 +113,60 @@ const StyledTextInput = styled.TextInput`
   margin-right: 5px;
   margin-top: 10px;
   border: 1px #ccc;
-`;
+`
 
 const StyledInputLabel = styled.Text`
   color: gray;
   font-size: 13px;
   text-align: left;
   padding-top: 5px;
-`;
+`
 const LeftIcon = styled.View`
   left: 15px;
   top: 48px;
   position: absolute;
   z-index: 1;
-`;
+`
 
 const RightIcon = styled.TouchableOpacity`
   right: 15px;
   top: 48px;
   position: absolute;
   z-index: 1;
-`;
+`
 const InputsWrapper = styled.View`
   flex-direction: column;
   justify-content: center;
-
-`;
+`
 const NameText = styled.Text`
-  color: grey
-`;
+  color: grey;
+`
 
 const Register = ({ navigation }) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [confirmPass,setConfirmPass] = useState('')
+  const [confirmPass, setConfirmPass] = useState('')
   const [loading, setLoading] = useState(false)
-  const [hidePassword, setHidePassword] = useState(true);
-  const [hideConfirmPass, setHideConfirmPass] = useState(true);
+  const [hidePassword, setHidePassword] = useState(true)
+  const [hideConfirmPass, setHideConfirmPass] = useState(true)
 
   const register = () => {
     setLoading(true)
     if (!email || !password || !firstName || !lastName || !confirmPass) {
-      alert("All fields are mandatory");
-      setPassword("");
-      setEmail("");
-      setLoading(false);
+      alert('All fields are mandatory')
+      setPassword('')
+      setEmail('')
+      setLoading(false)
     }
-    if (confirmPass != password){
-      alert ("Passwords do NOT match");
-      setPassword("");
-      setEmail("");
-      setConfirmPass("");
-      setLoading(false);
-
-    }  
-      return
-    
+    if (confirmPass != password) {
+      alert('Passwords do NOT match')
+      setPassword('')
+      setEmail('')
+      setConfirmPass('')
+      setLoading(false)
+    }
 
     auth
       .createUserWithEmailAndPassword(email, password)
@@ -205,7 +200,7 @@ const Register = ({ navigation }) => {
           <Header login={false} />
           <FormWrapper>
             <Form>
-              <KeyboardAvoidingView style={{ width: "100%" }}>
+              <KeyboardAvoidingView style={{ width: '100%' }}>
                 <SignInText>Sign Up</SignInText>
                 <InputsWrapper>
                   <HalfInputWrapper>
@@ -262,12 +257,12 @@ const Register = ({ navigation }) => {
 
                   <SubmitForm onPress={register} disabled={loading}>
                     <ButtonText>
-                      {loading ? "Loading..." : "Sign Up"}
+                      {loading ? 'Loading...' : 'Sign Up'}
                     </ButtonText>
                   </SubmitForm>
                   <NewToApp
                     activeOpacity={0.5}
-                    onPress={() => navigation.navigate("Login")}
+                    onPress={() => navigation.navigate('Login')}
                   >
                     <NewToApp>Already have an account ? Sign In</NewToApp>
                   </NewToApp>
@@ -278,7 +273,7 @@ const Register = ({ navigation }) => {
         </Overlay>
       </Container>
     </>
-  );
+  )
 }
 const MyTextInput = ({
   label,
@@ -298,13 +293,13 @@ const MyTextInput = ({
       {isPassword && (
         <RightIcon onPress={() => setHidePassword(!hidePassword)}>
           <Entypo
-            name={hidePassword ? "eye-with-line" : "eye"}
+            name={hidePassword ? 'eye-with-line' : 'eye'}
             size={24}
             color="grey"
           />
         </RightIcon>
       )}
     </View>
-  );
-};
+  )
+}
 export default Register

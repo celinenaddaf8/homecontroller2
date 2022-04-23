@@ -31,7 +31,6 @@ const Container2 = styled.View`
   padding-left: 10px;
   height: 110px;
   width: 100%;
-
 `
 
 const Logo = styled.Image`
@@ -42,9 +41,8 @@ const Logo = styled.Image`
 const Logo2 = styled.Image`
   width: 200px;
   height: 200px;
-  top:78px;
-  
-`;
+  top: 78px;
+`
 
 const Avatar2 = styled.Image`
   width: 40px;
@@ -97,7 +95,10 @@ const Header = ({ login, goBack, label }) => {
               <AntDesign name="arrowleft" size={24} color="white" />
             </TouchableOpacity>
           ) : (
-            <Logo resizeMode="contain" source={require('../assets/logoOrange.png')} />
+            <Logo
+              resizeMode="contain"
+              source={require('../assets/logoOrange.png')}
+            />
           )}
           {label && <HeaderTitle>{label}</HeaderTitle>}
         </HeaderLeftSide>
