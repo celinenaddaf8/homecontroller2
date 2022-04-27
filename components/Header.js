@@ -24,23 +24,24 @@ const Container = styled.View`
 `
 
 const Container2 = styled.View`
-  background-color: grey;
+  background-color: white;
   align-items: center;
   flex-direction: row;
-  justify-content: space-between;
-  padding-left: 20px;
+  justify-content: center;
+  padding-left: 10px;
   height: 110px;
   width: 100%;
 `
 
 const Logo = styled.Image`
-  width: 23px;
+  width: 110px;
   height: 45px;
 `
 
 const Logo2 = styled.Image`
-  width: 125px;
-  height: 145px;
+  width: 200px;
+  height: 200px;
+  top: 78px;
 `
 
 const Avatar2 = styled.Image`
@@ -94,7 +95,10 @@ const Header = ({ login, goBack, label }) => {
               <AntDesign name="arrowleft" size={24} color="white" />
             </TouchableOpacity>
           ) : (
-            <Logo resizeMode="contain" source={require('../assets/logo.png')} />
+            <Logo
+              resizeMode="contain"
+              source={require('../assets/logoOrange.png')}
+            />
           )}
           {label && <HeaderTitle>{label}</HeaderTitle>}
         </HeaderLeftSide>
@@ -137,7 +141,7 @@ const Header = ({ login, goBack, label }) => {
       <Container2>
         <Logo2
           resizeMode="contain"
-          source={require('../assets/netflixlogo2.png')}
+          source={require('../assets/logoOrange.png')}
         />
       </Container2>
     ))
