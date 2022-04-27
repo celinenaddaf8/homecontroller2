@@ -20,6 +20,7 @@ import firebase from 'firebase'
 import SearchScreen from './screen/SearchScreen'
 import { LogBox } from 'react-native'
 import Swiper from './screen/Swiper'
+import Monitor from './screen/Monitor'
 LogBox.ignoreLogs(['Warning: ...'])
 LogBox.ignoreAllLogs()
 
@@ -103,9 +104,9 @@ const App = () => {
   return (
     <NavigationContainer>
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={{ flex: 1 }}
-        keyboardVerticalOffset={Platform.OS === "ios" ? -64 : 0}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? -64 : 0}
       >
         <Stack.Navigator
           initialRouteName="Swiper"
@@ -117,7 +118,7 @@ const App = () => {
             options={{
               gestureEnabled: true,
               animationEnabled: true,
-              gestureDirection: "horizontal",
+              gestureDirection: 'horizontal',
             }}
           />
           <Stack.Screen
@@ -126,10 +127,11 @@ const App = () => {
             options={{
               gestureEnabled: true,
               animationEnabled: true,
-              gestureDirection: "horizontal",
+              gestureDirection: 'horizontal',
             }}
           />
           <Stack.Screen name="BottomStack" component={BottomStackScreen} />
+          <Stack.Screen name="Monitor" component={Monitor} />
           <Stack.Screen name="ViewMovie" component={ViewMovie} />
           <Stack.Screen name="MyList" component={MyList} />
           <Stack.Screen name="Search" component={SearchScreen} />
@@ -138,7 +140,7 @@ const App = () => {
         </Stack.Navigator>
       </KeyboardAvoidingView>
     </NavigationContainer>
-  );
+  )
 }
 
 export default App
