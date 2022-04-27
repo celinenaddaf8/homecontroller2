@@ -21,6 +21,7 @@ import SearchScreen from './screen/SearchScreen'
 import { LogBox } from 'react-native'
 import Swiper from './screen/Swiper'
 import Monitor from './screen/Monitor'
+import Room from './screen/Room'
 LogBox.ignoreLogs(['Warning: ...'])
 LogBox.ignoreAllLogs()
 
@@ -137,6 +138,7 @@ const App = () => {
           <Stack.Screen name="Search" component={SearchScreen} />
           <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="Swiper" component={Swiper} />
+          <Stack.Screen name="Room" component={Room} />
         </Stack.Navigator>
       </KeyboardAvoidingView>
     </NavigationContainer>

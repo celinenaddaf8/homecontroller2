@@ -39,11 +39,11 @@ const ImagesContainer = styled.View`
   border-radius: 20px;
 `
 
-const AppButton = ({ onPress, uri }) => {
+const AppButton = ({ onPress, uri, navigation }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log(onPress)
+        navigation.navigate('Room')
       }}
       style={styles.appButtonContainer}
     >
@@ -57,7 +57,7 @@ const AppButton = ({ onPress, uri }) => {
   )
 }
 
-const Monitor = () => {
+const Monitor = ({ navigation }) => {
   return (
     <BigContainer>
       <TitleText>SMART HOME</TitleText>
@@ -67,18 +67,22 @@ const Monitor = () => {
         <AppButton
           onPress="Kitchen"
           uri={'https://www.linkpicture.com/q/kitchennn.png'}
+          navigation={navigation}
         />
         <AppButton
           onPress="Bathroom"
           uri={'https://www.linkpicture.com/q/bathroomnew.png'}
+          navigation={navigation}
         />
         <AppButton
           onPress="Bedroom"
           uri={'https://www.linkpicture.com/q/bedroomnew1.png'}
+          navigation={navigation}
         />
         <AppButton
           onPress="Living Room"
           uri={'https://www.linkpicture.com/q/livinggroom.png'}
+          navigation={navigation}
         />
       </ImagesContainer>
     </BigContainer>
