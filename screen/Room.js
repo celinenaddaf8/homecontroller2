@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { View, StyleSheet, Text, TextInput, Button, Switch } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import styled from 'styled-components/native'
 
@@ -52,8 +53,8 @@ const SwitchComp = () => {
 
   return (
     <Switch
-      trackColor={{ false: '#f60902', true: '#18f612' }}
-      thumbColor={isEnabled ? '#FFF' : '#f4f3f4'}
+      trackColor={{ false: 'gray', true: '#f4a460' }}
+      thumbColor={isEnabled ? 'FFF' : '#f4f3f4'}
       ios_backgroundColor="#3e3e3e"
       onValueChange={toggleSwitch}
       value={isEnabled}
@@ -87,6 +88,9 @@ const Room = () => {
             <SwitchComp></SwitchComp>
           </Device>
         </Devices>
+        <TouchableOpacity>
+          <Text>Return</Text>
+        </TouchableOpacity>
       </View>
     </Container>
   )
