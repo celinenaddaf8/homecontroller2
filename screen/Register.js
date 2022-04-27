@@ -180,7 +180,7 @@ const Register = ({ navigation }) => {
             list: [],
           })
           .then(() => {
-            navigation.replace('BottomStack')
+            navigation.replace('Monitor')
             setPassword('')
             setEmail('')
             setLoading(false)

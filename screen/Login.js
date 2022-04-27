@@ -61,7 +61,7 @@ const StyledTextInput = styled.TextInput`
   font-size: 16px;
   border-radius: 15px;
   height: 60px;
-  margin-vertical: 3px;
+  margin-top: 3px;
   margin-bottom: 10px;
   color: gray;
   border: 1px #ccc;
@@ -145,7 +145,7 @@ const Login = ({ navigation }) => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((authUser) => {
-        navigation.replace('BottomStack')
+        navigation.replace('Monitor')
         setPassword('')
         setEmail('')
         console.log(authUser)
