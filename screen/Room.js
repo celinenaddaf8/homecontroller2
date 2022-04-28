@@ -62,7 +62,7 @@ const SwitchComp = () => {
   )
 }
 
-const Room = () => {
+const Room = ({ navigation }) => {
   return (
     <Container>
       <Header>
@@ -88,7 +88,7 @@ const Room = () => {
             <SwitchComp></SwitchComp>
           </Device>
         </Devices>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Monitor')}>
           <Text>Return</Text>
         </TouchableOpacity>
       </View>

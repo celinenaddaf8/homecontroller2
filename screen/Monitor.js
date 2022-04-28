@@ -39,7 +39,7 @@ const ImagesContainer = styled.View`
   border-radius: 20px;
 `
 
-const AppButton = ({ onPress, uri, navigation }) => {
+const AppButton = ({ uri, navigation }) => {
   return (
     <TouchableOpacity
       onPress={() => {
