@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-
+import { useNavigation } from '@react-navigation/native'
 import {
   View,
   Picker,
@@ -56,13 +56,8 @@ const Select = () => {
   )
 }
 
-const AppButton = ({ onPress, title }) => (
-  <TouchableOpacity onPress={onPress}>
-    <Text>{title}</Text>
-  </TouchableOpacity>
-)
-
 const EditDevice = () => {
+  const navigation = useNavigation()
   return (
     <Container>
       <Header>
@@ -71,7 +66,9 @@ const EditDevice = () => {
       <DeviceText> PRODUCT Name:</DeviceText>
       <DeviceText> Amp:</DeviceText>
       <Select></Select>
-      <AppButton title="EDIT PRODUCT" size="sm" backgroundColor="grey" />
+      <TouchableOpacity onPress={() => navigation.navigate('Monitor')}>
+        <Text>Confirm Edit</Text>
+      </TouchableOpacity>
     </Container>
   )
 }
