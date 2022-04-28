@@ -108,7 +108,7 @@ const App = () => {
         keyboardVerticalOffset={Platform.OS === "ios" ? -64 : 0}
       >
         <Stack.Navigator
-          initialRouteName="Swiper"
+          initialRouteName="toggle"
           screenOptions={screenOptions}
         >
           <Stack.Screen

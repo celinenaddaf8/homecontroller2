@@ -48,7 +48,7 @@ const Swiper = ({ navigation }) => {
         >
           <ScrollView
             horizontal={true}
-            pagingEnabled
+            pagingEnabled 
             showsHorizontalScrollIndicator={false}
             onScroll={Animated.event([
               {
