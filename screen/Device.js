@@ -54,7 +54,7 @@ const Device = ({ deviceName }) => {
     <Container>
       <Text>{deviceName}</Text>
       <SwitchComp></SwitchComp>
-      <TouchableOpacity onPress={() => navigation.navigate('Monitor')}>
+      <TouchableOpacity onPress={() => navigation.navigate('EditDevice')}>
         <Text>Edit Device</Text>
       </TouchableOpacity>
     </Container>

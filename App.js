@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import EditDevice from './screen/EditDevice'
 import Home from './screen/Home'
 import Login from './screen/Login'
 import { NavigationContainer } from '@react-navigation/native'
@@ -141,6 +141,7 @@ const App = () => {
           <Stack.Screen name="Swiper" component={Swiper} />
           <Stack.Screen name="Room" component={Room} />
           <Stack.Screen name="Device" component={Device} />
+          <Stack.Screen name="EditDevice" component={EditDevice} />
         </Stack.Navigator>
       </KeyboardAvoidingView>
     </NavigationContainer>
