@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { View, StyleSheet, Text, TextInput, Button, Switch } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-
+import Device from './Device'
 import styled from 'styled-components/native'
 
 const Container = styled.View`
@@ -32,35 +32,10 @@ const Devices = styled.View`
   flex-direction: column;
 `
 
-const Device = styled.View`
-  height: 20%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 3px solid #f4a460;
-  margin-top: 4%;
-`
-
 const HeaderText = styled.Text`
   font-size: 25;
   color: gray;
 `
-
-const SwitchComp = () => {
-  const [isEnabled, setIsEnabled] = useState(false)
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState)
-
-  return (
-    <Switch
-      trackColor={{ false: 'gray', true: '#f4a460' }}
-      thumbColor={isEnabled ? 'FFF' : '#f4f3f4'}
-      ios_backgroundColor="#3e3e3e"
-      onValueChange={toggleSwitch}
-      value={isEnabled}
-    />
-  )
-}
 
 const Room = ({ navigation }) => {
   return (
@@ -71,22 +46,10 @@ const Room = ({ navigation }) => {
       </Header>
       <View>
         <Devices>
-          <Device>
-            <DeviceText> Device 1 (name): ... Amp </DeviceText>
-            <SwitchComp></SwitchComp>
-          </Device>
-          <Device>
-            <DeviceText> Device 1 (name): ... Amp </DeviceText>
-            <SwitchComp></SwitchComp>
-          </Device>
-          <Device>
-            <DeviceText> Device 1 (name): ... Amp </DeviceText>
-            <SwitchComp></SwitchComp>
-          </Device>
-          <Device>
-            <DeviceText> Device 1 (name): ... Amp </DeviceText>
-            <SwitchComp></SwitchComp>
-          </Device>
+          <Device deviceName="Device 1"></Device>
+          <Device deviceName="Device 2"></Device>
+          <Device deviceName="Device 3"></Device>
+          <Device deviceName="Device 4"></Device>
         </Devices>
         <TouchableOpacity onPress={() => navigation.navigate('Monitor')}>
           <Text>Return</Text>
