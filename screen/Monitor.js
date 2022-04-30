@@ -10,14 +10,18 @@ import {
 import styled from 'styled-components/native'
 
 const BigContainer = styled.View`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
   height: 100%;
   width: 100%;
-  border: 4px solid #f4a460;
-`
+  background-color: white;
+`;
+const Container = styled.View`
+  height: 70%;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+`;
 
 const TitleText = styled.Text`
   margin-top: 3%;
@@ -26,7 +30,6 @@ const TitleText = styled.Text`
 `
 
 const ImagesContainer = styled.View`
-  margin-top: 20;
   display: flex;
   flex-direction: row;
   align-content: center;
@@ -35,9 +38,14 @@ const ImagesContainer = styled.View`
   width: 100%;
   height: 70%;
   align-items: center;
-
+  background-color:white;
   border-radius: 20px;
+  top:10%
 `
+const Logo2 = styled.Image`
+  width: 200px;
+  height: 200px;
+  top:5%`
 
 const AppButton = ({ uri, navigation }) => {
   return (
@@ -60,33 +68,41 @@ const AppButton = ({ uri, navigation }) => {
 const Monitor = ({ navigation }) => {
   return (
     <BigContainer>
-      <TitleText>SMART HOME</TitleText>
-      <TitleText>Amp: 7A </TitleText>
-      <TitleText>Volt: 220V </TitleText>
-      <ImagesContainer>
-        <AppButton
-          onPress="Kitchen"
-          uri={'https://www.linkpicture.com/q/kitchennn.png'}
-          navigation={navigation}
-        />
-        <AppButton
-          onPress="Bathroom"
-          uri={'https://www.linkpicture.com/q/bathroomnew.png'}
-          navigation={navigation}
-        />
-        <AppButton
-          onPress="Bedroom"
-          uri={'https://www.linkpicture.com/q/bedroomnew1.png'}
-          navigation={navigation}
-        />
-        <AppButton
-          onPress="Living Room"
-          uri={'https://www.linkpicture.com/q/livinggroom.png'}
-          navigation={navigation}
-        />
-      </ImagesContainer>
+      <Container>
+        <TitleText>HOME CONTROLLER</TitleText>
+        <Logo2 source={require("../assets/logoOrange.png")} />
+
+        <TitleText>Amp: 7A </TitleText>
+        <TitleText>Volt: 220V </TitleText>
+        <ImagesContainer>
+          <AppButton
+            roomName="Kitchen"
+            onPress="Kitchen"
+            uri={"https://www.linkpicture.com/q/kitchennn.png"}
+            navigation={navigation}
+          />
+          <AppButton
+            roomName="Bathroom"
+            onPress="Bathroom"
+            uri={"https://www.linkpicture.com/q/bathroomnew.png"}
+            navigation={navigation}
+          />
+          <AppButton
+            roomName="Bedroom"
+            onPress="Bedroom"
+            uri={"https://www.linkpicture.com/q/bedroomnew1.png"}
+            navigation={navigation}
+          />
+          <AppButton
+            roomName="Living Room"
+            onPress="Living Room"
+            uri={"https://www.linkpicture.com/q/livinggroom.png"}
+            navigation={navigation}
+          />
+        </ImagesContainer>
+      </Container>
     </BigContainer>
-  )
+  );
 }
 const styles = StyleSheet.create({
   appButtonContainer: {
