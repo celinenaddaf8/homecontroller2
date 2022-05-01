@@ -31,7 +31,7 @@ const FormWrapper = styled.KeyboardAvoidingView`
 `
 
 const Form = styled.KeyboardAvoidingView`
-  height: 400px;
+  height: 90%;
   width: 90%;
   background-color: white;;
   flex-direction: column;
@@ -65,8 +65,8 @@ const StyledTextInput = styled.TextInput`
   height: 60px;
   margin-vertical: 3px;
   margin-bottom: 10px;
-  color: gray;
-  border: 1px #ccc;
+  color: grey;
+  border:1px grey
 `;
 
 const StyledInputLabel = styled.Text`
@@ -128,38 +128,69 @@ const Overlay = styled.View`
   flex: 1;
 `
 
+const MsgBox = styled.Text`
+  text-align: center;
+  font-size: 13px;
+  color:red
+`;
+
+
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [hidePassword, setHidePassword ] = useState(true)
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   
 
-  const login = () => {
-    setLoading(true)
-    if (!email || !password) {
-      alert('All fields are mandatory')
-      setPassword('')
-      setEmail('')
-      setLoading(false)
-      return
-    }
+ const handleSubmit = () => {
+   setLoading(false)
+   var emailValid = false;
+   if (email.length == 0) {
+     setEmailError("Email is required");
+   } else if (email.length < 6) {
+     setEmailError("Email should be minimum 6 characters");
+   } else if (email.indexOf(" ") >= 0) {
+     setEmailError("Email cannot contain spaces");
+   } else if (email.indexOf("@") <= 0) {
+     setEmailError("Wrong email format ");
+   } else if (email.indexOf(".com") <= 0) {
+     setEmailError("Wrong email format");
+   } else {
+     emailValid = true;
+     setEmailError("");
+   }
 
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((authUser) => {
-        navigation.replace('BottomStack')
-        setPassword('')
-        setEmail('')
-        console.log(authUser)
-        setLoading(false)
-      })
-      .catch((err) => {
-        setLoading(false)
-        alert(err)
-      })
-  }
-
+   var passValid = false;
+   if (password.length == 0) {
+     setPasswordError("Password is required");
+     setLoading(false);
+   } else if (password.length < 6) {
+     setPasswordError("Password should be minimum 6 characters");
+   } else if (password.indexOf(" ") >= 0) {
+     setPasswordError("Password cannot contain spaces");
+   } else {
+     passValid = true;
+     setPasswordError("");
+   }
+   if (emailValid && passValid){
+     setLoading(true)
+   };
+     auth
+       .signInWithEmailAndPassword(email, password)
+       .then((authUser) => {
+         navigation.replace("BottomStack");
+         setPassword("");
+         setEmail("");
+         console.log(authUser);
+         setLoading(false);
+       })
+       .catch((err) => {
+         setLoading(false);
+       });
+ };
+  
   return (
     <>
       <StatusBar style="white" />
@@ -173,17 +204,18 @@ const Login = ({ navigation }) => {
               <MyTextInput
                 label="Email Address"
                 icon="idcard"
-                placeholder="Enter your email"
-                placeholderTextColor="grey"
+                placeholder="user@email.com"
+                placeholderTextColor="#ccc"
                 value={email}
                 onChangeText={(text) => setEmail(text)}
                 keyboardType="email-address"
               />
+              {emailError.length > 0 && <MsgBox>{emailError}</MsgBox>}
               <MyTextInput
                 label="Password"
                 icon="lock"
-                placeholder="Password"
-                placeholderTextColor="grey"
+                placeholder="********"
+                placeholderTextColor="#ccc"
                 secureTextEntry={hidePassword}
                 isPassword={true}
                 hidePassword={hidePassword}
@@ -191,7 +223,9 @@ const Login = ({ navigation }) => {
                 value={password}
                 onChangeText={(text) => setPassword(text)}
               />
-              <SubmitForm onPress={login} disabled={loading}>
+              {passwordError.length > 0 && <MsgBox>{passwordError}</MsgBox>}
+
+              <SubmitForm onPress={handleSubmit} disabled={loading}>
                 <ButtonText>{loading ? "Loading..." : "Sign In"}</ButtonText>
               </SubmitForm>
               <NewToAppWrapper

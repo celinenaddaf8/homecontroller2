@@ -13,61 +13,60 @@ import styled from 'styled-components/native'
 
 import Header from '../components/Header'
 import { auth, db } from '../firebase'
-import { color } from 'react-native-reanimated';
+
+
 
 const Container = styled.ScrollView`
-  flex: 1;
-  background-color: white;
-`
+  
+  width:100%;
+  height:100%;
+`;
 
 const FormWrapper = styled.KeyboardAvoidingView`
-  background-color: white;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  height: 655px;
-`
+ justify-content: center;
+align-items: center;
+  
+`;
 
 const Form = styled.KeyboardAvoidingView`
-  height: 600px;
-  width: 90%;
   background-color: white;
+  height: 88%;
+  width: 90%;
   flex-direction: column;
   border-radius: 20px;
-  padding: 10px;
-  justify-content: center;
-  border: 4px #f4a460;
-
+  padding: 5%;
+  justify-content: space-between;
+  border: 2px #f4a460;
 `;
 
 const SubmitForm = styled.TouchableOpacity`
   width: 95%;
-  height: 50px;
+  height: 6%;
   color: white;
   border-radius: 10px;
   border: none;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
   background-color: #f4a460;
+  top:2%
 `;
 
 const ButtonText = styled.Text`
   font-size: 15px;
   font-weight: bold;
-  padding-left: 5px;
+  padding-left: 2%;
   color: white;
 `
 const SignInText = styled.Text`
   font-size: 30px;
   font-weight: bold;
   color: #f4a460;
-  margin: 10px;
   text-align: left;
 `
 
 const NewToAppWrapper = styled.TouchableOpacity`
   width: 100%;
+  background-color:red;
 `
 
 const NewToApp = styled.Text`
@@ -75,7 +74,7 @@ const NewToApp = styled.Text`
   font-weight: 500;
   text-align: center;
   color: gray;
-  margin: 15px;
+  margin: 5%;
   text-align: center;
 `
 
@@ -92,14 +91,14 @@ const HalfInputWrapper = styled.View`
 
 const HalfInput = styled.TextInput`
   width: 45.8%;
-  height: 50px;
+  height: 70%;
   border: none;
-  padding: 10px;
+  padding: 3%;
   border-radius: 15px;
   background-color: white;
   color: grey;
-  margin-right: 5px;
-  margin-top: 10px;
+  margin-right: 1.5%;
+  margin-top: 1%;
   border: 1px #ccc;
 `;
 const StyledTextInput = styled.TextInput`
@@ -108,13 +107,14 @@ const StyledTextInput = styled.TextInput`
   padding-left: 55px;
   padding-right: 55px;
   font-size: 16px;
-  height: 60px;
   border-radius: 15px;
+  height: 60px;
+  margin-vertical: 3px;
+  margin-bottom: 10px;
   color: grey;
-  margin-right: 5px;
-  margin-top: 10px;
-  border: 1px #ccc;
+  border: 1px grey;
 `;
+
 
 const StyledInputLabel = styled.Text`
   color: gray;
@@ -137,11 +137,17 @@ const RightIcon = styled.TouchableOpacity`
 `;
 const InputsWrapper = styled.View`
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
 
 `;
 const NameText = styled.Text`
   color: grey
+`;
+
+const MsgBox = styled.Text`
+  text-align: center;
+  font-size: 13px;
+  color: red;
 `;
 
 const Register = ({ navigation }) => {
@@ -153,23 +159,90 @@ const Register = ({ navigation }) => {
   const [loading, setLoading] = useState(false)
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPass, setHideConfirmPass] = useState(true);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [nameError, setNameError] = useState("");
+  
 
   const register = () => {
-    setLoading(true)
-    if (!email || !password || !firstName || !lastName || !confirmPass) {
-      alert("All fields are mandatory");
-      setPassword("");
-      setEmail("");
-      setLoading(false);
-    }
-    if (confirmPass != password){
-      alert ("Passwords do NOT match");
-      setPassword("");
-      setEmail("");
-      setConfirmPass("");
-      setLoading(false);
+    setLoading(false)
+    var nameValid = false;
+    if (firstName.length == 0 || lastName.length==0) {
+     setNameError("Name is required");
+   } else if (firstName.length < 3 || lastName.length < 3) {
+     setNameError("Name should be minimum 3 characters");
+    
+   }
+   else{
+     nameValid = true
+     setNameError("")
+   }
+  var emailValid = false;  
+     if (email.length == 0) {
+     setEmailError("Email is required");
+    
 
-    }  
+   } else if (email.length < 6) {
+     setEmailError("Email should be minimum 6 characters");
+    
+   } else if (email.indexOf(" ") >= 0) {
+     setEmailError("Email cannot contain spaces");
+    
+  } else if (email.indexOf("@") <= 0) {
+     setEmailError("Wrong email format ");
+    
+  } else if (email.indexOf(".com") <= 0) {
+     setEmailError("Wrong email format");
+     
+  } 
+  else{
+     emailValid = true;
+     setEmailError("")
+  }
+
+
+  var passValid = false;
+   if (password.length == 0) {
+     setPasswordError("Password is required");
+     setLoading(false);
+   } else if (password.length < 6) {
+     setPasswordError("Password should be minimum 6 characters");
+  
+     
+   } else if (password.indexOf(" ") >= 0) {
+     setPasswordError("Password cannot contain spaces");
+  
+
+   }
+   else{
+      passValid = true;
+      setPasswordError("")
+   }
+
+  var confirmPassValid = false; 
+   if (confirmPass.length == 0) {
+     setConfirmPasswordError("Password is required");
+     
+     
+   } else if (confirmPass.length < 6) {
+     setConfirmPasswordError("Password should be minimum 6 characters");
+    
+   
+   } else if (confirmPass.indexOf(" ") >= 0) {
+     setConfirmPasswordError("Password cannot contain spaces");
+    
+   } else if (password != confirmPass) {
+     setConfirmPasswordError("Password cannot contain spaces");
+   }
+   else{
+     confirmPassValid = true;
+     setConfirmPasswordError("")
+   }
+
+   if (emailValid && nameValid && passValid && confirmPassValid){
+     setLoading(true);
+   }
       return
     
 
@@ -192,92 +265,92 @@ const Register = ({ navigation }) => {
           })
       })
       .catch((err) => {
-        alert(err)
         setLoading(false)
       })
   }
 
   return (
-    <>
+    <View style={{backgroundColor: 'white'}}>
       <StatusBar style="light" />
-      <Container>
-        <Overlay>
-          <Header login={false} />
-          <FormWrapper>
-            <Form>
-              <KeyboardAvoidingView style={{ width: "100%" }}>
-                <SignInText>Sign Up</SignInText>
-                <InputsWrapper>
-                  <HalfInputWrapper>
-                    <NameText>First Name</NameText>
-                    <HalfInput
-                      placeholderTextColor="grey"
-                      placeholder="First Name"
-                      value={firstName}
-                      onChangeText={(text) => setFirstName(text)}
-                    />
-                  </HalfInputWrapper>
-                  <HalfInputWrapper>
-                    <NameText>Last Name</NameText>
-                    <HalfInput
-                      placeholderTextColor="grey"
-                      placeholder="Last Name"
-                      value={lastName}
-                      onChangeText={(text) => setLastName(text)}
-                    />
-                  </HalfInputWrapper>
-                  <MyTextInput
-                    label="Email Address"
-                    icon="idcard"
-                    placeholder="Enter your email"
-                    placeholderTextColor="grey"
-                    value={email}
-                    onChangeText={(text) => setEmail(text)}
-                    keyboardType="email-address"
-                  />
-                  <MyTextInput
-                    label="Password"
-                    icon="lock"
-                    placeholder="Password"
-                    placeholderTextColor="grey"
-                    secureTextEntry={hidePassword}
-                    isPassword={true}
-                    hidePassword={hidePassword}
-                    setHidePassword={setHidePassword}
-                    value={password}
-                    onChangeText={(text) => setPassword(text)}
-                  />
-                  <MyTextInput
-                    label="Confirm Your Password"
-                    icon="lock"
-                    placeholder="Confirm Password"
-                    placeholderTextColor="grey"
-                    secureTextEntry={hideConfirmPass}
-                    isPassword={true}
-                    hidePassword={hideConfirmPass}
-                    setHidePassword={setHideConfirmPass}
-                    value={confirmPass}
-                    onChangeText={(text) => setConfirmPass(text)}
-                  />
 
-                  <SubmitForm onPress={register} disabled={loading}>
-                    <ButtonText>
-                      {loading ? "Loading..." : "Sign Up"}
-                    </ButtonText>
-                  </SubmitForm>
-                  <NewToApp
-                    activeOpacity={0.5}
-                    onPress={() => navigation.navigate("Login")}
-                  >
-                    <NewToApp>Already have an account ? Sign In</NewToApp>
-                  </NewToApp>
-                </InputsWrapper>
-              </KeyboardAvoidingView>
-            </Form>
-          </FormWrapper>
-        </Overlay>
-      </Container>
-    </>
+      <Header login={false} />
+      <FormWrapper>
+        <Form>
+          <KeyboardAvoidingView style={{ width: "100%" }}>
+            <SignInText>Sign Up</SignInText>
+            <InputsWrapper>
+              <HalfInputWrapper>
+                <NameText>First Name</NameText>
+                <HalfInput
+                  placeholderTextColor="#ccc"
+                  placeholder="user"
+                  value={firstName}
+                  onChangeText={(text) => setFirstName(text)}
+                />
+              </HalfInputWrapper>
+              <HalfInputWrapper>
+                <NameText>Last Name</NameText>
+                <HalfInput
+                  placeholderTextColor="#ccc"
+                  placeholder="user"
+                  value={lastName}
+                  onChangeText={(text) => setLastName(text)}
+                />
+              </HalfInputWrapper>
+              {nameError.length > 0 && <MsgBox>{nameError}</MsgBox>}
+              <MyTextInput
+                label="Email Address"
+                icon="idcard"
+                placeholder="user@email.com"
+                placeholderTextColor="#ccc"
+                value={email}
+                onChangeText={(text) => setEmail(text)}
+                keyboardType="email-address"
+              />
+              {emailError.length > 0 && <MsgBox>{emailError}</MsgBox>}
+              <MyTextInput
+                label="Password"
+                icon="lock"
+                placeholder="********"
+                placeholderTextColor="#ccc"
+                secureTextEntry={hidePassword}
+                isPassword={true}
+                hidePassword={hidePassword}
+                setHidePassword={setHidePassword}
+                value={password}
+                onChangeText={(text) => setPassword(text)}
+              />
+              {passwordError.length > 0 && <MsgBox>{passwordError}</MsgBox>}
+              <MyTextInput
+                label="Confirm Your Password"
+                icon="lock"
+                placeholder="********"
+                placeholderTextColor="#ccc"
+                secureTextEntry={hideConfirmPass}
+                isPassword={true}
+                hidePassword={hideConfirmPass}
+                setHidePassword={setHideConfirmPass}
+                value={confirmPass}
+                onChangeText={(text) => setConfirmPass(text)}
+              />
+              {confirmPasswordError.length > 0 && (
+                <MsgBox>{confirmPasswordError}</MsgBox>
+              )}
+
+              <SubmitForm onPress={register} disabled={loading}>
+                <ButtonText>{loading ? "Loading..." : "Sign Up"}</ButtonText>
+              </SubmitForm>
+              <NewToApp
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate("Login")}
+              >
+                <NewToApp>Already have an account ? Sign In</NewToApp>
+              </NewToApp>
+            </InputsWrapper>
+          </KeyboardAvoidingView>
+        </Form>
+      </FormWrapper>
+    </View>
   );
 }
 const MyTextInput = ({

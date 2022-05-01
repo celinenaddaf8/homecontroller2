@@ -40,9 +40,9 @@ const Logo = styled.Image`
 `
 
 const Logo2 = styled.Image`
-  width: 200px;
-  height: 200px;
-  top:78px;
+  width: 60%;
+  height: 60%;
+  top:7%
   
 `;
 
