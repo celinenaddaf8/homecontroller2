@@ -43,7 +43,6 @@ const Logo2 = styled.Image`
   width: 60%;
   height: 60%;
   top:7%
-  
 `;
 
 const Avatar2 = styled.Image`
