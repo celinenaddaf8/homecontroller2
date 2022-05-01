@@ -24,7 +24,7 @@ const Container = styled.View`
 `;
 
 const TitleText = styled.Text`
-  margin-top: 3%;
+  margin-top: 5%;
   color: gray;
   font-size: 20;
 `
@@ -43,10 +43,14 @@ const ImagesContainer = styled.View`
   top:10%
 `
 const Logo2 = styled.Image`
-  width: 200px;
-  height: 200px;
-  top:5%`
-
+  width: 20%;
+  height: 20%;
+  `
+export const Line = styled.View`
+height: 0.2%;
+width: 60%;
+background-color: #f4a460;
+`
 const AppButton = ({ uri, navigation }) => {
   return (
     <TouchableOpacity
@@ -59,7 +63,7 @@ const AppButton = ({ uri, navigation }) => {
         source={{
           uri: uri,
         }}
-        style={{ width: '100%', height: 200, borderRadius: 10 }}
+        style={{ width: '100%', height:"50%", borderRadius: 10 }}
       ></Image>
     </TouchableOpacity>
   )
@@ -69,9 +73,9 @@ const Monitor = ({ navigation }) => {
   return (
     <BigContainer>
       <Container>
-        <TitleText>HOME CONTROLLER</TitleText>
+        <TitleText style={{marginTop:"20%"}}>HOME CONTROLLER</TitleText>
         <Logo2 source={require("../assets/logoOrange.png")} />
-
+        <Line></Line>
         <TitleText>Amp: 7A </TitleText>
         <TitleText>Volt: 220V </TitleText>
         <ImagesContainer>
@@ -104,6 +108,7 @@ const Monitor = ({ navigation }) => {
     </BigContainer>
   );
 }
+
 const styles = StyleSheet.create({
   appButtonContainer: {
     marginBottom: 10,
@@ -112,10 +117,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
   },
-  image: {
-    width: 500,
-    height: 500,
-  },
+ 
 })
 
 export default Monitor

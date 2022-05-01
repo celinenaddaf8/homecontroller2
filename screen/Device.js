@@ -7,61 +7,32 @@ import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
-const editButton = ({ uri, navigation }) => {
-  return (
-    <TouchableOpacity
-      onPress={() => {
-        navigation.navigate("Room");
-      }}
-      style={styles.appButtonContainer}
-    >
-      <Image
-        source={{
-          uri: uri,
-        }}
-        style={{ width: "100%", height: 200, borderRadius: 10 }}
-      ></Image>
-    </TouchableOpacity>
-  );
-};
+
 const Container = styled.View`
-  flex: 1;
-  width: 100%;
-  height: 100%;
+  width: 55%;
+  height: 80%;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 `;
 
 const StyledCard = styled.View`
-  height: 70%;
-  width: 100%;
-  display: flex;
+  height: 80%;
+  width: 70%;
   justify-content: center;
   align-items: center;
-  border: 3px #f4a460;
   margin-top: 4%;
-  margin-left: 30%;
-  border-width: 1;
+  border-width: 1.5;
   border-radius: 4;
   border-color: #ddd;
-  border-bottom-width: 0;
-  shadow-color: #f4a460;
-  shadow-offset: {width: 0, height: 2};
-  shadow-opacity: 0.8;
-  shadow-radius: 2;
-  elevation: 1;
- 
 `;
 
 const EditButton = styled.TouchableOpacity`
+  width:30%
   flex-direction: row;
   background-color: #f4a460;
   border-radius:5;
-  shadow-offset: {width: 1, height: 2};
-  shadow-opacity: 0.8;
-  shadow-radius: 2;
-  elevation: 1;
-  align-items: center;
+  justify-content: center;
   top:5%
 `;
 
@@ -75,7 +46,7 @@ const SwitchComp = ({id}) => {
     <Switch
       style={{ transform: [{ rotate: "-90deg" }] }}
       trackColor={{ false: "gray", true: "#f4a460" }}
-      thumbColor={isEnabled ? "FFF" : "#f4f3f4"}
+      thumbColor={isEnabled ? "#EECC8C" : "#f5f5f5"}
       ios_backgroundColor="#3e3e3e"
       onValueChange={toggleSwitch}
       value={isEnabled}

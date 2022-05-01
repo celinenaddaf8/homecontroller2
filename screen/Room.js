@@ -5,59 +5,53 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import Device from './Device';
 import styled from 'styled-components/native';
 
-const BigContainer = styled.View`
+
+const RoomContainer = styled.View`
+  width:100%
+  height:100%
+  background-color:white
+  `;
+
+const Container = styled.View`
+  height: 25%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+const Container1 = styled.View`
+  height: 50%;
+  width: 100%;
+  align-items: center;
+  justify-content:center;
+  padding: 5%;
+  
+`;
+
+const DeviceContainer = styled.View`
   height: 100%;
   width: 100%;
-  background-color: white;
-  
-`; 
-const Container2 = styled.View`
-  
-  align-items: center;
-  height: 30%;
-  width: 100%;
-  display: flex;
+  border: 4px #f4a460;
+  border-radius: 5px;
 `;
-const Container = styled.View`
-  height: 70%;
-  width: 100%;
-  display: flex;
-  background-color: white;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-`;
-const DeviceContainer = styled.View`
-  height: 65%;
-  width: 90%;
-  background-color: white;
-  flex-direction: column;
-  border-radius: 20px;
-  justify-content: space-between;
-  align-items: center;
-  border: 4px gray;
 
-  padding-right: 30px;
-  border-width: 5;
-  border-radius: 7;
-  border-color: #ccc;
-  border-bottom-width: 5;
-  shadow-color: #f4a460;
-  shadow-offset: {width: 2, height: 4};
-  shadow-opacity: 5;
-  shadow-radius: 2;
-  elevation:1;
+const Container2 = styled.View`
+  align-items: center;
+  height: 25%;
+  width: 100%;
+  display: flex;
+
 `;
 const TextContainer = styled.View`
-  height: 10%;
+  height: 20%;
   width: 90%;
-  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background-color: #f4a460;
   border-radius: 20px;
-  top: 30%;
+  top: 10%;
 `;
 const TotalUsageText = styled.Text`
   font-size: 25;
@@ -82,17 +76,17 @@ const ReturnButton = styled.TouchableOpacity`
   border: none;
   justify-content:center;
   align-items:center;
-  padding-right:20px;
   flex-direction: row;
-  top:40%;
-  width:30%
+  top:10%;
+  width:25%
 `;
 const Logo2 = styled.Image`
   width: 20%;
-  height: 15%;
+  height: 30%;
   background-color: white;
-  top:5%
+  top:30%
 `;
+
 const SwitchComp = () => {
   const [isEnabled, setIsEnabled] = useState(true);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
@@ -101,10 +95,10 @@ const SwitchComp = () => {
     <Switch
       style={{
         transform: [{ scaleX: 1.4 }, { scaleY: 1.4 }, { rotate: "-90deg" }],
-        alignItems:"center"
+        alignItems: "center",
       }}
       trackColor={{ false: "gray", true: "#f4a460" }}
-      thumbColor={isEnabled ? "FFF" : "#f4f3f4"}
+      thumbColor={isEnabled ? "#EECC8C" : "#f5f5f5"}
       ios_backgroundColor="#3e3e3e"
       onValueChange={toggleSwitch}
       value={isEnabled}
@@ -113,10 +107,12 @@ const SwitchComp = () => {
 };
 const Room = ({ navigation }) => {
   return (
-    <BigContainer>
+    <RoomContainer>
       <Container>
         <Logo2 source={require("../assets/logoOrange.png")} />
         <SwitchComp></SwitchComp>
+      </Container>
+      <Container1>
         <DeviceContainer>
           <Devices>
             <Device deviceName="TV"></Device>
@@ -127,7 +123,7 @@ const Room = ({ navigation }) => {
             <Device deviceName="Heater"></Device>
           </Devices>
         </DeviceContainer>
-      </Container>
+      </Container1>
       <Container2>
         <TextContainer>
           <TotalUsageText>Total room usage: ... Amp </TotalUsageText>
@@ -138,7 +134,7 @@ const Room = ({ navigation }) => {
           </Text>
         </ReturnButton>
       </Container2>
-    </BigContainer>
+    </RoomContainer>
   );
 }
 
