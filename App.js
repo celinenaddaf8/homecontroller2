@@ -18,13 +18,10 @@ import MyList from './screen/MyList'
 import { db } from './firebase'
 import firebase from 'firebase'
 import SearchScreen from './screen/SearchScreen'
-import { LogBox } from 'react-native'
 import Swiper from './screen/Swiper'
 import Monitor from './screen/Monitor'
 import Room from './screen/Room'
 import Device from './screen/Device'
-LogBox.ignoreLogs(['Warning: ...'])
-LogBox.ignoreAllLogs()
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
