@@ -2,7 +2,7 @@ import React from 'react'
 
 import styled from 'styled-components/native'
 import { AntDesign, MaterialIcons, Ionicons } from '@expo/vector-icons'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, Text } from 'react-native'
 import { auth } from '../firebase'
 import {
   useFonts,
@@ -39,9 +39,9 @@ const Logo = styled.Image`
 `
 
 const Logo2 = styled.Image`
-  width: 200px;
-  height: 200px;
-  top: 78px;
+  width: 60%;
+  height: 60%;
+  top: 7%;
 `
 
 const Avatar2 = styled.Image`
@@ -89,53 +89,7 @@ const Header = ({ login, goBack, label }) => {
     fontsLoaded &&
     (login ? (
       <Container>
-        <HeaderLeftSide>
-          {goBack ? (
-            <TouchableOpacity style={{ marginLeft: 10 }} onPress={goBack}>
-              <AntDesign name="arrowleft" size={24} color="white" />
-            </TouchableOpacity>
-          ) : (
-            <Logo
-              resizeMode="contain"
-              source={require('../assets/logoOrange.png')}
-            />
-          )}
-          {label && <HeaderTitle>{label}</HeaderTitle>}
-        </HeaderLeftSide>
-        <HeaderIcons>
-          {goBack ? (
-            <TouchableOpacity
-              activeOpacity={0.5}
-              onPress={() => {
-                navigation.navigate('Search')
-              }}
-            >
-              <MaterialIcons
-                name="search"
-                size={30}
-                color="white"
-                style={{ marginRight: 15 }}
-              />
-            </TouchableOpacity>
-          ) : (
-            <></>
-          )}
-          {goBack ? (
-            <TouchableOpacity activeOpacity={0.5} onPress={signOutUser}>
-              <Avatar2
-                resizeMode="contain"
-                source={{
-                  uri:
-                    'https://occ-0-4857-2164.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABTYctxxbe-UkKEdlMxXm4FVGD6DqTHkQ0TQ5CQJ9jbOMnG0CYxYcSICcTUQz8DrB7CpKUGpqJVMtEqksLlvSJx2ac3Ak.png?r=a41',
-                }}
-              />
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity activeOpacity={0.5} onPress={signOutUser}>
-              <HeaderTitle>Sign Out</HeaderTitle>
-            </TouchableOpacity>
-          )}
-        </HeaderIcons>
+        <Text>We have toput the logout button</Text>
       </Container>
     ) : (
       <Container2>
