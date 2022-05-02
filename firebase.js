@@ -3,13 +3,13 @@ import 'firebase/firestore'
 import 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDMr8cn-p8jN1GXukA3B0_lfkgpXq5ykZI',
-  authDomain: 'homecontroller-3ffcd.firebaseapp.com',
-  projectId: 'homecontroller-3ffcd',
-  storageBucket: 'homecontroller-3ffcd.appspot.com',
-  messagingSenderId: '607510348776',
-  appId: '1:607510348776:web:091358292e65ef6126da5d',
-  measurementId: 'G-WF40DWH0RB',
+  apiKey: 'AIzaSyCFwkMt0M1MZfsEL0uI9CfEvgqgBwjziWQ',
+  authDomain: 'homecontroller-dd4a3.firebaseapp.com',
+  projectId: 'homecontroller-dd4a3',
+  storageBucket: 'homecontroller-dd4a3.appspot.com',
+  messagingSenderId: '707448388660',
+  appId: '1:707448388660:web:23e6aef6ed826706c41e61',
+  measurementId: 'G-VP0FVNE15X',
 }
 
 let app
