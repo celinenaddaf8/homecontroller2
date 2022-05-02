@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "netflix-clone",
-    "slug": "netflix-clone",
+    "name": "home-controller",
+    "slug": "home-controller",
     "version": "1.0.0",
     "sdkVersion": "42.0.0",
     "orientation": "portrait",
@@ -24,12 +24,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/splash2.png",
         "backgroundColor": "#000000"
       }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     }
   }
 }
