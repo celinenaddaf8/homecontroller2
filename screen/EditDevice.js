@@ -1,16 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import {
-  View,
-  StyleSheet,
-  Text,
-  TextInput,
-  Button,
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native'
-import { StatusBar } from 'expo-status-bar'
+import { Text } from 'react-native'
 import styled from 'styled-components/native'
 import { Picker } from '@react-native-community/picker'
 

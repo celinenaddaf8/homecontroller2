@@ -1,19 +1,12 @@
 import React, { useState } from 'react'
 
-import {
-  Dimensions,
-  Text,
-  KeyboardAvoidingView,
-  ImageBackground,
-  View,
-} from 'react-native'
+import { KeyboardAvoidingView, View } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { AntDesign, Entypo } from '@expo/vector-icons'
 import styled from 'styled-components/native'
 
 import Header from '../components/Header'
 import { auth, db } from '../firebase'
-import { color } from 'react-native-reanimated'
 
 const Container = styled.ScrollView`
   flex: 1;

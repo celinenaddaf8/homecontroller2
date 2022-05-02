@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  StyleSheet,
-  Text,
-  Dimensions,
-  Image,
-  TouchableOpacity,
-} from 'react-native'
+import { StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { auth } from '../firebase'
 import { useNavigation } from '@react-navigation/native'

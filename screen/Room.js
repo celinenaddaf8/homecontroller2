@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { View, StyleSheet, Text, TextInput, Button, Switch } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { Text, Switch } from 'react-native'
 import Device from './Device'
 import styled from 'styled-components/native'
 
