@@ -1,19 +1,10 @@
 import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
-import {
-  Dimensions,
-  Text,
-  KeyboardAvoidingView,
-  Platform,
-  ImageBackground,
-  View,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native'
+import { View } from 'react-native'
 import styled from 'styled-components/native'
 
 import Header from '../components/Header'
-import { auth, db } from '../firebase'
+import { auth } from '../firebase'
 
 import { AntDesign, Entypo } from '@expo/vector-icons'
 

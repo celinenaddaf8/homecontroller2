@@ -81,7 +81,7 @@ const Monitor = () => {
   return (
     <BigContainer>
       <Container>
-        <TitleText style={{ marginTop: '20%' }}>HOME CONTROLLER</TitleText>
+        <TitleText>HOME CONTROLLER</TitleText>
         <Logo2 source={require('../assets/logoOrange.png')} />
         <TouchableOpacity
           onPress={() => {
