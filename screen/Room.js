@@ -71,7 +71,7 @@ const ReturnButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  top: 10%;
+  top: 7%;
   width: 25%;
 `;
 const Logo2 = styled.Image`
@@ -124,7 +124,7 @@ const Room = ({ navigation }) => {
           </Devices>
           <Devices>
             <Device deviceName="LAMP 1"></Device>
-            <Device deviceName="Heater"></Device>
+            <Device deviceName="HEATER"></Device>
           </Devices>
         </DeviceContainer>
       </Container1>

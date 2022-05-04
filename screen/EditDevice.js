@@ -16,7 +16,7 @@ const Logo2 = styled.Image`
   top: 30%;
   background-color: white;
 `
-const Header = styled.View`
+const Header = styled.KeyboardAvoidingView`
   height: 25%;
   width: 100%;
   display: flex;
@@ -24,7 +24,7 @@ const Header = styled.View`
   justify-content: space-between;
   align-items: center;
 `
-const Container1 = styled.View`
+const Container1 = styled.KeyboardAvoidingView`
   height: 60%;
   width: 100%;
   align-items: center;
@@ -32,7 +32,7 @@ const Container1 = styled.View`
   padding: 10%;
 `
 
-const Container = styled.View`
+const Container = styled.KeyboardAvoidingView`
   height: 100%;
   width: 100%;
   border: 4px #f4a460;
@@ -45,7 +45,7 @@ const HeaderText = styled.Text`
   font-size: 25px;
   color: gray;
 `
-const DeviceContainer = styled.View`
+const DeviceContainer = styled.KeyboardAvoidingView`
   height: 20%;
   width: 100%;
   flex-direction: row;
@@ -67,7 +67,7 @@ const DeviceInput = styled.TextInput`
   color: grey;
   border: 1px #ccc;
 `
-const SelectRoomContainer = styled.View`
+const SelectRoomContainer = styled.KeyboardAvoidingView`
   height: 20%;
   width: 100%;
   flex-direction: row;
