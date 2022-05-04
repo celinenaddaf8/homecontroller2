@@ -17,6 +17,7 @@ import Monitor from './screen/Monitor'
 import Room from './screen/Room'
 import Device from './screen/Device'
 import EditDevice from './screen/EditDevice'
+import AddDevice from './screen/AddDevice'
 LogBox.ignoreLogs(['Warning: ...'])
 LogBox.ignoreAllLogs()
 
@@ -32,9 +33,9 @@ const App = () => {
   return (
     <NavigationContainer>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? -64 : 0}
+        keyboardVerticalOffset={Platform.OS === "ios" ? -64 : 0}
       >
         <Stack.Navigator
           initialRouteName="Swiper"
@@ -46,7 +47,7 @@ const App = () => {
             options={{
               gestureEnabled: true,
               animationEnabled: true,
-              gestureDirection: 'horizontal',
+              gestureDirection: "horizontal",
             }}
           />
           <Stack.Screen
@@ -55,7 +56,7 @@ const App = () => {
             options={{
               gestureEnabled: true,
               animationEnabled: true,
-              gestureDirection: 'horizontal',
+              gestureDirection: "horizontal",
             }}
           />
 
@@ -65,10 +66,11 @@ const App = () => {
           <Stack.Screen name="Room" component={Room} />
           <Stack.Screen name="Device" component={Device} />
           <Stack.Screen name="Edit" component={EditDevice} />
+          <Stack.Screen name="Add" component={AddDevice} />
         </Stack.Navigator>
       </KeyboardAvoidingView>
     </NavigationContainer>
-  )
+  );
 }
 
 export default App
