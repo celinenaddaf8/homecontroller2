@@ -15,7 +15,7 @@ const Container = styled.View`
 `
 
 const StyledCard = styled.View`
-  height: 70%;
+  height: 80%;
   width: 70%;
   justify-content: center;
   align-items: center;

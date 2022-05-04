@@ -1,28 +1,29 @@
-import React from 'react'
-import { StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
-import styled from 'styled-components/native'
-import { auth } from '../firebase'
-import { useNavigation } from '@react-navigation/native'
+import React from "react";
+import { StyleSheet, Text, Image, TouchableOpacity } from "react-native";
+import styled from "styled-components/native";
+import { auth } from "../firebase";
+import { useNavigation } from "@react-navigation/native";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const BigContainer = styled.View`
   height: 100%;
   width: 100%;
   background-color: white;
-`
+`;
 const Container = styled.View`
-  height: 70%;
+  height: 100%;
   width: 100%;
   align-items: center;
   display: flex;
   background-color: white;
   flex-direction: column;
-`
+`;
 
 const TitleText = styled.Text`
   margin-top: 5%;
   color: gray;
   font-size: 20;
-`
+`;
 
 const ImagesContainer = styled.View`
   display: flex;
@@ -31,32 +32,33 @@ const ImagesContainer = styled.View`
   justify-content: space-evenly;
   flex-wrap: wrap;
   width: 100%;
-  height: 70%;
+  height: 50%;
   align-items: center;
   background-color: white;
-  border-radius: 20px;
   top: 10%;
-`
+`;
 const Logo2 = styled.Image`
-  width: 20%;
+  width: 30%;
   height: 20%;
-`
+`;
 const Line = styled.View`
   height: 0.2%;
-  width: 60%;
+  width: 70%;
   background-color: #f4a460;
-`
+`;
+
+
 const signOutUser = (navigation) => {
   auth.signOut().then(() => {
-    navigation.navigate('Login')
-  })
-}
+    navigation.navigate("Login");
+  });
+};
 
 const AppButton = ({ uri, navigation }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('Room')
+        navigation.navigate("Room");
       }}
       style={styles.appButtonContainer}
     >
@@ -64,25 +66,25 @@ const AppButton = ({ uri, navigation }) => {
         source={{
           uri: uri,
         }}
-        style={{ width: '100%', height: '50%', borderRadius: 10 }}
+        style={{ width: "100%", height: "40%", borderRadius: 10 }}
       ></Image>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 const Monitor = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   return (
     <BigContainer>
       <Container>
         <TitleText>HOME CONTROLLER</TitleText>
-        <Logo2 source={require('../assets/logoOrange.png')} />
+        <Logo2 source={require("../assets/logoOrange.png")} />
         <TouchableOpacity
           onPress={() => {
-            signOutUser(navigation)
+            signOutUser(navigation);
           }}
         >
-          <Text>Log Out</Text>
+          <Text style={{ color: "#808080" }}>Log Out</Text>
         </TouchableOpacity>
         <Line></Line>
         <TitleText>Amp: 7A </TitleText>
@@ -91,41 +93,41 @@ const Monitor = () => {
           <AppButton
             roomName="Kitchen"
             onPress="Kitchen"
-            uri={'https://www.linkpicture.com/q/kitchennn.png'}
+            uri={"https://www.linkpicture.com/q/kitchennn.png"}
             navigation={navigation}
           />
           <AppButton
             roomName="Bathroom"
             onPress="Bathroom"
-            uri={'https://www.linkpicture.com/q/bathroomnew.png'}
+            uri={"https://www.linkpicture.com/q/bathroomnew.png"}
             navigation={navigation}
           />
           <AppButton
             roomName="Bedroom"
             onPress="Bedroom"
-            uri={'https://www.linkpicture.com/q/bedroomnew1.png'}
+            uri={"https://www.linkpicture.com/q/bedroomnew1.png"}
             navigation={navigation}
           />
           <AppButton
             roomName="Living Room"
             onPress="Living Room"
-            uri={'https://www.linkpicture.com/q/livinggroom.png'}
+            uri={"https://www.linkpicture.com/q/livinggroom.png"}
             navigation={navigation}
           />
         </ImagesContainer>
       </Container>
     </BigContainer>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   appButtonContainer: {
     marginBottom: 10,
-    width: '40%',
+    width: "40%",
     elevation: 30,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 10,
   },
-})
+});
 
-export default Monitor
+export default Monitor;

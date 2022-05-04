@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Text, Switch } from 'react-native'
 import Device from './Device'
 import styled from 'styled-components/native'
+import { MaterialIcons } from "@expo/vector-icons";
 
 const RoomContainer = styled.View`
   width: 100%;
@@ -45,13 +46,13 @@ const TextContainer = styled.View`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #f4a460;
+  background-color: #808080;
   border-radius: 20px;
   top: 10%;
 `
 const TotalUsageText = styled.Text`
   font-size: 25;
-  color: gray;
+  color: white;
 `
 
 const Devices = styled.View`
@@ -62,9 +63,8 @@ const Devices = styled.View`
   align-items: center;
   background-color: white;
 `
-
 const ReturnButton = styled.TouchableOpacity`
-  background-color: #f4a460;
+  background-color: #808080
   color: grey;
   border-radius: 10px;
   border: none;
@@ -73,14 +73,21 @@ const ReturnButton = styled.TouchableOpacity`
   flex-direction: row;
   top: 10%;
   width: 25%;
-`
+`;
 const Logo2 = styled.Image`
   width: 20%;
   height: 30%;
   background-color: white;
   top: 30%;
 `
-
+const AddDeviceButton = styled.TouchableOpacity`
+  width: 30%;
+  flex-direction: row;
+  border-radius: 5;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  top: 1%;
+`;
 const SwitchComp = () => {
   const [isEnabled, setIsEnabled] = useState(true)
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState)
@@ -103,9 +110,12 @@ const Room = ({ navigation }) => {
   return (
     <RoomContainer>
       <Container>
-        <Logo2 source={require('../assets/logoOrange.png')} />
+        <Logo2 source={require("../assets/logoOrange.png")} />
         <SwitchComp></SwitchComp>
       </Container>
+      <AddDeviceButton onPress={() => navigation.navigate("Add")}>
+        <MaterialIcons name="my-library-add" size={30} color="grey" />
+      </AddDeviceButton>
       <Container1>
         <DeviceContainer>
           <Devices>
@@ -122,14 +132,14 @@ const Room = ({ navigation }) => {
         <TextContainer>
           <TotalUsageText>Total room usage: ... Amp </TotalUsageText>
         </TextContainer>
-        <ReturnButton onPress={() => navigation.navigate('Monitor')}>
-          <Text style={{ color: 'grey', fontWeight: 'bold', fontSize: 18 }}>
+        <ReturnButton onPress={() => navigation.navigate("Monitor")}>
+          <Text style={{ color: "white", fontWeight: "bold", fontSize: 18}}>
             return
           </Text>
         </ReturnButton>
       </Container2>
     </RoomContainer>
-  )
+  );
 }
 
 export default Room
