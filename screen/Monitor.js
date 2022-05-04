@@ -82,7 +82,7 @@ const Monitor = () => {
             signOutUser(navigation)
           }}
         >
-          <Text>Log Out</Text>
+          <Text style = {{color: "#f4a460"}}>Log Out</Text>
         </TouchableOpacity>
         <Line></Line>
         <TitleText>Amp: 7A </TitleText>

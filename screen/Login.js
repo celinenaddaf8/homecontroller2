@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import styled from 'styled-components/native'
 
 import Header from '../components/Header'
-import { auth } from '../firebase'
+import {firebase, auth} from '../firebase'
 
 import { AntDesign, Entypo } from '@expo/vector-icons'
 

@@ -5,6 +5,7 @@ import { Text } from 'react-native'
 import styled from 'styled-components/native'
 import { Picker } from '@react-native-community/picker'
 
+
 const BigContainer = styled.KeyboardAvoidingView`
   height: 100%;
   width: 100%;
@@ -145,7 +146,7 @@ const EditDevice = () => {
             <Select></Select>
           </DeviceContainer>
         </Container>
-        <ConfirmButton onPress={() => navigation.navigate('Room')}>
+        <ConfirmButton onPress={() => navigation.navigate('Fetch')}>
           <Text style={{ color: 'grey', fontWeight: 'bold', fontSize: 18 }}>
             Confirm Edit
           </Text>

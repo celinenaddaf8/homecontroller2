@@ -17,6 +17,7 @@ import Monitor from './screen/Monitor'
 import Room from './screen/Room'
 import Device from './screen/Device'
 import EditDevice from './screen/EditDevice'
+import Fetch from './screen/data'
 LogBox.ignoreLogs(['Warning: ...'])
 LogBox.ignoreAllLogs()
 
@@ -65,6 +66,7 @@ const App = () => {
           <Stack.Screen name="Room" component={Room} />
           <Stack.Screen name="Device" component={Device} />
           <Stack.Screen name="Edit" component={EditDevice} />
+          <Stack.Screen name="Fetch" component={Fetch} />
         </Stack.Navigator>
       </KeyboardAvoidingView>
     </NavigationContainer>
