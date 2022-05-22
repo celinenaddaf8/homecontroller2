@@ -4,37 +4,27 @@ import { useNavigation } from '@react-navigation/native'
 import { Text } from 'react-native'
 import styled from 'styled-components/native'
 import { Picker } from '@react-native-community/picker'
+import Header from '../components/Header'
 
 const BigContainer = styled.KeyboardAvoidingView`
   height: 100%;
   width: 100%;
-  background-color: white;
-`
-const Logo2 = styled.Image`
-  width: 20%;
-  height: 40%;
-  top: 30%;
-  background-color: white;
-`
-const Header = styled.KeyboardAvoidingView`
-  height: 25%;
-  width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  flex-direction: column;
+  background-color: white;
 `
+
 const Container1 = styled.KeyboardAvoidingView`
-  height: 60%;
+  height: 80%;
   width: 100%;
   align-items: center;
   justify-content: center;
-  padding: 10%;
 `
 
 const Container = styled.KeyboardAvoidingView`
-  height: 100%;
-  width: 100%;
+  height: 50%;
+  width: 80%;
   border: 4px #f4a460;
   border-radius: 5px;
   align-items: center;
@@ -43,6 +33,7 @@ const Container = styled.KeyboardAvoidingView`
 
 const HeaderText = styled.Text`
   font-size: 25px;
+  top: 8%;
   color: gray;
 `
 const DeviceContainer = styled.KeyboardAvoidingView`
@@ -127,10 +118,8 @@ const EditDevice = () => {
   const navigation = useNavigation()
   return (
     <BigContainer>
-      <Header>
-        <Logo2 source={require('../assets/logoOrange.png')} />
-        <HeaderText> Edit Device </HeaderText>
-      </Header>
+      <Header></Header>
+      <HeaderText>Edit Device</HeaderText>
       <Container1>
         <Container>
           <DeviceContainer>

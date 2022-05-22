@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
-import { SwtichRelayStatus } from './data'
+
 const Container = styled.View`
   width: 55%;
   height: 80%;
@@ -35,13 +35,8 @@ const EditButton = styled.TouchableOpacity`
 `
 
 const SwitchComp = ({ id }) => {
-  const [isEnabled, setIsEnabled] = useState(false)
+  const [isEnabled, setIsEnabled] = useState(true)
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState)
-
-  const handleSwitch = () => {
-    toggleSwitch()
-    SwtichRelayStatus()
-  }
 
   return (
     <Switch
@@ -49,7 +44,7 @@ const SwitchComp = ({ id }) => {
       trackColor={{ false: 'gray', true: '#f4a460' }}
       thumbColor={isEnabled ? '#EECC8C' : '#f5f5f5'}
       ios_backgroundColor="#3e3e3e"
-      onValueChange={handleSwitch}
+      onValueChange={toggleSwitch}
       value={isEnabled}
     />
   )

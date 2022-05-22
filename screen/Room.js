@@ -4,6 +4,7 @@ import { Text, Switch } from 'react-native'
 import Device from './Device'
 import styled from 'styled-components/native'
 import { MaterialIcons } from '@expo/vector-icons'
+import Header from '../components/Header'
 
 const RoomContainer = styled.View`
   width: 100%;
@@ -110,9 +111,12 @@ const Room = ({ navigation }) => {
   return (
     <RoomContainer>
       <Container>
-        <Logo2 source={require('../assets/logoOrange.png')} />
+        <Header></Header>
+        {/* <SwitchComp></SwitchComp> */}
       </Container>
-
+      {/* <AddDeviceButton onPress={() => navigation.navigate("Add")}>
+        <MaterialIcons name="my-library-add" size={30} color="grey" />
+      </AddDeviceButton> */}
       <Container1>
         <DeviceContainer>
           <Devices>
