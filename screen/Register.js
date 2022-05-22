@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import { KeyboardAvoidingView, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { AntDesign, Entypo } from "@expo/vector-icons";
-import styled from "styled-components/native";
-
-import Header from "../components/Header";
-import { auth, db } from "../firebase";
+import { KeyboardAvoidingView, View } from 'react-native'
+import { StatusBar } from 'expo-status-bar'
+import { AntDesign, Entypo } from '@expo/vector-icons'
+import styled from 'styled-components/native'
+import firebase from 'firebase'
+import Header from '../components/Header'
+import { auth, db } from '../firebase'
 
 const Container = styled.ScrollView`
   flex: 1;
   background-color: white;
-`;
+`
 
 const FormWrapper = styled.KeyboardAvoidingView`
   background-color: white;
@@ -19,7 +19,7 @@ const FormWrapper = styled.KeyboardAvoidingView`
   justify-content: center;
   align-items: center;
   height: 655px;
-`;
+`
 
 const Form = styled.KeyboardAvoidingView`
   height: 600px;
@@ -30,7 +30,7 @@ const Form = styled.KeyboardAvoidingView`
   padding: 10px;
   justify-content: center;
   border: 4px #f4a460;
-`;
+`
 
 const SubmitForm = styled.TouchableOpacity`
   width: 95%;
@@ -42,25 +42,25 @@ const SubmitForm = styled.TouchableOpacity`
   align-items: center;
   margin-top: 20px;
   background-color: #f4a460;
-`;
+`
 
 const ButtonText = styled.Text`
   font-size: 15px;
   font-weight: bold;
   padding-left: 5px;
   color: white;
-`;
+`
 const SignInText = styled.Text`
   font-size: 30px;
   font-weight: bold;
   color: #f4a460;
   margin: 10px;
   text-align: left;
-`;
+`
 
 const NewToAppWrapper = styled.TouchableOpacity`
   width: 100%;
-`;
+`
 
 const NewToApp = styled.Text`
   font-size: 15px;
@@ -69,18 +69,18 @@ const NewToApp = styled.Text`
   color: gray;
   margin: 15px;
   text-align: center;
-`;
+`
 
 const Overlay = styled.View`
-  background-color: "rgba(0,0,0,0.5)";
+  background-color: 'rgba(0,0,0,0.5)';
   flex: 1;
-`;
+`
 
 const HalfInputWrapper = styled.View`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-`;
+`
 
 const HalfInput = styled.TextInput`
   width: 45.8%;
@@ -93,7 +93,7 @@ const HalfInput = styled.TextInput`
   margin-right: 5px;
   margin-top: 10px;
   border: 1px #ccc;
-`;
+`
 const StyledTextInput = styled.TextInput`
   background-color: white;
   padding: 15px;
@@ -106,82 +106,99 @@ const StyledTextInput = styled.TextInput`
   margin-right: 5px;
   margin-top: 10px;
   border: 1px #ccc;
-`;
+`
 
 const StyledInputLabel = styled.Text`
   color: gray;
   font-size: 13px;
   text-align: left;
   padding-top: 5px;
-`;
+`
 const LeftIcon = styled.View`
   left: 15px;
   top: 48px;
   position: absolute;
   z-index: 1;
-`;
+`
 
 const RightIcon = styled.TouchableOpacity`
   right: 15px;
   top: 48px;
   position: absolute;
   z-index: 1;
-`;
+`
 const InputsWrapper = styled.View`
   flex-direction: column;
   justify-content: center;
-`;
+`
 const NameText = styled.Text`
   color: grey;
-`;
+`
 
 const Register = ({ navigation }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPass, setConfirmPass] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [hidePassword, setHidePassword] = useState(true);
-  const [hideConfirmPass, setHideConfirmPass] = useState(true);
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPass, setConfirmPass] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [hidePassword, setHidePassword] = useState(true)
+  const [hideConfirmPass, setHideConfirmPass] = useState(true)
 
-  // const register = () => {
-  //   setLoading(true)
-  //   if (!email || !password || !firstName || !lastName || !confirmPass) {
-  //     alert('All fields are mandatory')
-  //     setPassword('')
-  //     setEmail('')
-  //     setLoading(false)
-  //   }
-  //   if (confirmPass != password) {
-  //     alert('Passwords do NOT match')
-  //     setPassword('')
-  //     setEmail('')
-  //     setConfirmPass('')
-  //     setLoading(false)
-  //   }
+  const writeUserData = (authUser) => {
+    firebase
+      .database()
+      .ref('users/' + authUser.user.uid)
+      .set({
+        username: firstName,
+        lastname: lastName,
+        devices: '',
+        relays: '',
+      })
+  }
 
-  auth
-    .createUserWithEmailAndPassword(email, password)
-    .then((authUser) => {
-      db.collection("users")
-        .doc(email)
-        .set({
-          firstName,
-          lastName,
-          email,
-          list: [],
-        })
-        .then(() => {
-          navigation.replace("Monitor");
-          setPassword("");
-          setEmail("");
-          setLoading(false);
-        });
-    })
-    .catch((err) => {
-      alert(err);
-    });
+  const register = () => {
+    setLoading(true)
+    if (!email || !password || !firstName || !lastName || !confirmPass) {
+      alert('All fields are mandatory')
+      setPassword('')
+      setEmail('')
+      setLoading(false)
+      return
+    }
+    if (confirmPass != password) {
+      alert('Passwords do NOT match')
+      setPassword('')
+      setEmail('')
+      setConfirmPass('')
+      setLoading(false)
+      return
+    }
+
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        writeUserData(authUser)
+        db.collection('users')
+          .doc(email)
+          .set({
+            firstName,
+            lastName,
+            email,
+            list: [],
+          })
+          .then(() => {
+            navigation.replace('Monitor')
+            setPassword('')
+            setEmail('')
+            setLoading(false)
+          })
+      })
+
+      .catch((err) => {
+        alert(err)
+      })
+  }
 
   return (
     <>
@@ -191,7 +208,7 @@ const Register = ({ navigation }) => {
           <Header login={false} />
           <FormWrapper>
             <Form>
-              <KeyboardAvoidingView style={{ width: "100%" }}>
+              <KeyboardAvoidingView style={{ width: '100%' }}>
                 <SignInText>Sign Up</SignInText>
                 <InputsWrapper>
                   <HalfInputWrapper>
@@ -248,12 +265,12 @@ const Register = ({ navigation }) => {
 
                   <SubmitForm onPress={register} disabled={loading}>
                     <ButtonText>
-                      {loading ? "Loading..." : "Sign Up"}
+                      {loading ? 'Loading...' : 'Sign Up'}
                     </ButtonText>
                   </SubmitForm>
                   <NewToApp
                     activeOpacity={0.5}
-                    onPress={() => navigation.navigate("Login")}
+                    onPress={() => navigation.navigate('Login')}
                   >
                     <NewToApp>Already have an account ? Sign In</NewToApp>
                   </NewToApp>
@@ -264,8 +281,8 @@ const Register = ({ navigation }) => {
         </Overlay>
       </Container>
     </>
-  );
-};
+  )
+}
 
 const MyTextInput = ({
   label,
@@ -285,13 +302,13 @@ const MyTextInput = ({
       {isPassword && (
         <RightIcon onPress={() => setHidePassword(!hidePassword)}>
           <Entypo
-            name={hidePassword ? "eye-with-line" : "eye"}
+            name={hidePassword ? 'eye-with-line' : 'eye'}
             size={24}
             color="grey"
           />
         </RightIcon>
       )}
     </View>
-  );
-};
-export default Register;
+  )
+}
+export default Register

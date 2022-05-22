@@ -4,6 +4,8 @@ import styled from 'styled-components/native'
 import { auth } from '../firebase'
 import { useNavigation } from '@react-navigation/native'
 import { FetchData } from './data'
+import Header from '../components/Header'
+
 const BigContainer = styled.View`
   height: 100%;
   width: 100%;
@@ -77,7 +79,7 @@ const Monitor = () => {
     <BigContainer>
       <Container>
         <TitleText>HOME CONTROLLER</TitleText>
-        <Logo2 source={require('../assets/logoOrange.png')} />
+        <Header />
         <TouchableOpacity
           onPress={() => {
             signOutUser(navigation)

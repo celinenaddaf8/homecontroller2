@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Text, Switch } from 'react-native'
 import Device from './Device'
 import styled from 'styled-components/native'
