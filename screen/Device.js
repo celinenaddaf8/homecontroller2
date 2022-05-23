@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
-
+import { getRelayStatus, SwtichRelayStatus } from './data'
 const Container = styled.View`
   width: 55%;
   height: 80%;
@@ -34,10 +34,12 @@ const EditButton = styled.TouchableOpacity`
   top: 5%;
 `
 
-const SwitchComp = ({ id }) => {
+const SwitchComp = ({ number }) => {
   const [isEnabled, setIsEnabled] = useState(true)
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState)
-
+  const toggleSwitch = () => {
+    setIsEnabled((previousState) => !previousState)
+    SwtichRelayStatus()
+  }
   return (
     <Switch
       style={{ transform: [{ rotate: '-90deg' }] }}
@@ -50,14 +52,14 @@ const SwitchComp = ({ id }) => {
   )
 }
 
-const Device = ({ deviceName }, id) => {
+const Device = ({ deviceName, relay }) => {
   const navigation = useNavigation()
   return (
     <Container>
       <StyledCard>
         <MaterialCommunityIcons name="devices" size={44} color="gray" />
         <Text style={{ color: 'grey' }}>{deviceName}</Text>
-        <SwitchComp></SwitchComp>
+        <SwitchComp number={relay}></SwitchComp>
       </StyledCard>
       <EditButton onPress={() => navigation.navigate('Edit')}>
         <AntDesign name="edit" size={24} color="gray" />

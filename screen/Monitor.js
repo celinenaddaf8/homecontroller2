@@ -2,10 +2,10 @@ import React from 'react'
 import { StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { auth } from '../firebase'
+import firebase from 'firebase'
 import { useNavigation } from '@react-navigation/native'
-import { FetchData } from './data'
 import Header from '../components/Header'
-
+import { useEffect, useState } from 'react'
 const BigContainer = styled.View`
   height: 100%;
   width: 100%;
@@ -54,11 +54,18 @@ const signOutUser = (navigation) => {
   })
 }
 
-const AppButton = ({ uri, navigation }) => {
+const AppButton = ({ uri, navigation, number }) => {
+  var userId = firebase.auth().currentUser.uid
   return (
     <TouchableOpacity
       onPress={() => {
         navigation.navigate('Room')
+        firebase
+          .database()
+          .ref('users/' + userId)
+          .update({
+            currentRoom: number,
+          })
       }}
       style={styles.appButtonContainer}
     >
@@ -73,8 +80,25 @@ const AppButton = ({ uri, navigation }) => {
 }
 
 const Monitor = () => {
+  const [number, setNumber] = useState(null)
   const navigation = useNavigation()
-  const amp = FetchData()
+  var userId = firebase.auth().currentUser.uid
+  console.log(userId)
+  const FetchData = () => {
+    firebase
+      .database()
+      .ref('users/' + userId + '/mainSensor')
+      .on('value', function (snapchot) {
+        const data = snapchot.val()
+        console.log('this is the data ' + data)
+        setNumber(data)
+        return number
+      })
+  }
+
+  useEffect(() => {
+    FetchData()
+  }, [])
   return (
     <BigContainer>
       <Container>
@@ -88,27 +112,31 @@ const Monitor = () => {
           <Text style={{ color: '#808080' }}>Log Out</Text>
         </TouchableOpacity>
         <Line></Line>
-        <TitleText>{amp < 0 ? 0 : amp} A</TitleText>
+        <TitleText>{number < 0 ? 0 : number} A</TitleText>
         <ImagesContainer>
           <AppButton
+            number="1"
             roomName="Kitchen"
             onPress="Kitchen"
             uri={'https://www.linkpicture.com/q/kitchennn.png'}
             navigation={navigation}
           />
           <AppButton
+            number="2"
             roomName="Bathroom"
             onPress="Bathroom"
             uri={'https://www.linkpicture.com/q/bathroomnew.png'}
             navigation={navigation}
           />
           <AppButton
+            number="3"
             roomName="Bedroom"
             onPress="Bedroom"
             uri={'https://www.linkpicture.com/q/bedroomnew1.png'}
             navigation={navigation}
           />
           <AppButton
+            number="4"
             roomName="Living Room"
             onPress="Living Room"
             uri={'https://www.linkpicture.com/q/livinggroom.png'}

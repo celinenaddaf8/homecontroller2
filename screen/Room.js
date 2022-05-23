@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { Text, Switch } from 'react-native'
+import firebase from 'firebase'
 import Device from './Device'
 import styled from 'styled-components/native'
 import { MaterialIcons } from '@expo/vector-icons'
@@ -107,32 +108,74 @@ const SwitchComp = () => {
     />
   )
 }
+
 const Room = ({ navigation }) => {
+  const [currentRoom, setCurrentRoom] = useState('0')
+  const [devices, setDevices] = useState({})
+  const [loading, setloading] = useState(true)
+  var userId = firebase.auth().currentUser.uid
+  const GetCurrentRoom = () => {
+    firebase
+      .database()
+      .ref('users/' + userId + '/currentRoom')
+      .on('value', function (snapshot) {
+        const data = snapshot.val()
+        setCurrentRoom(data)
+        console.log('this is' + data)
+        GetDevices(data)
+      })
+
+    return currentRoom
+  }
+  const GetDevices = (room) => {
+    console.log('room' + room)
+    firebase
+      .database()
+      .ref('users/' + userId + '/rooms/' + room + '/Devices')
+      .on('value', function (snapshot) {
+        const data = snapshot.val()
+        setDevices(data)
+        console.log(devices)
+        setloading(false)
+        return devices
+      })
+  }
+
+  GetCurrentRoom()
+  GetDevices()
+
+  if (loading) {
+    return <></>
+  }
   return (
     <RoomContainer>
       <Container>
         <Header></Header>
-        {/* <SwitchComp></SwitchComp> */}
       </Container>
-      {/* <AddDeviceButton onPress={() => navigation.navigate("Add")}>
+      <AddDeviceButton onPress={() => navigation.navigate('Add')}>
         <MaterialIcons name="my-library-add" size={30} color="grey" />
-      </AddDeviceButton> */}
+      </AddDeviceButton>
       <Container1>
         <DeviceContainer>
           <Devices>
-            <Device deviceName="TV"></Device>
-            <Device deviceName="AC"></Device>
-          </Devices>
-          <Devices>
-            <Device deviceName="LAMP 1"></Device>
-            <Device deviceName="HEATER"></Device>
+            {devices ? (
+              Object.entries(devices).map(([key], i) => (
+                <Device
+                  deviceName={devices[key].name}
+                  key={i}
+                  relay={devices[key].relay}
+                ></Device>
+              ))
+            ) : (
+              <></>
+            )}
           </Devices>
         </DeviceContainer>
       </Container1>
       <Container2>
-        <TextContainer>
+        {/* <TextContainer>
           <TotalUsageText>Total room usage: ... Amp </TotalUsageText>
-        </TextContainer>
+        </TextContainer> */}
         <ReturnButton onPress={() => navigation.navigate('Monitor')}>
           <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }}>
             return

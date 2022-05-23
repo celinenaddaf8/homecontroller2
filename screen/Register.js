@@ -152,7 +152,7 @@ const Register = ({ navigation }) => {
       .set({
         username: firstName,
         lastname: lastName,
-        devices: '',
+        rooms: '',
         relays: '',
       })
   }

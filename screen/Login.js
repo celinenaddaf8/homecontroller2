@@ -170,7 +170,6 @@ const Login = ({ navigation }) => {
         navigation.replace('Monitor')
         setPassword('')
         setEmail('')
-        console.log(authUser)
         setLoading(false)
       })
       .catch((err) => {
@@ -198,7 +197,7 @@ const Login = ({ navigation }) => {
                 onChangeText={(text) => setEmail(text)}
                 keyboardType="email-address"
               />
-            
+
               <MyTextInput
                 label="Password"
                 icon="lock"

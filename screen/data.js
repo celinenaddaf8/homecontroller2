@@ -1,48 +1,38 @@
 import firebase from 'firebase'
 import { useState } from 'react'
-var flag = '0'
-export function FetchData() {
-  const [number, setNumber] = useState(null)
+import { getDatabase, ref, set } from 'firebase/database'
+var value = null
 
+export function getRelayStatus() {
+  var userId = firebase.auth().currentUser.uid
   firebase
     .database()
-    .ref('numbers/number1')
-    .on('value', function (snapchot) {
-      const data = snapchot.val()
-      console.log('this is the data ' + data)
-      if (data != number) {
-        setNumber(data)
-      }
+    .ref('users/' + userId + '/relays/relay1')
+    .on('value', function (snapshot) {
+      const data = snapshot.val()
+      console.log(data)
     })
-  return number
 }
-
-function GetRelayStatus() {
-  const [isEnableed, setIsEnableed] = useState(null)
-  firebase
-    .database()
-    .ref('relayStatus/relayStatus')
-    .on('value', function (snapchot) {
-      const data = snapchot.val()
-      if (data != isEnableed) {
-        setIsEnableed(data)
-      }
-    })
-  return isEnableed
-}
-
 export function SwtichRelayStatus() {
+  var userId = firebase.auth().currentUser.uid
+  const db = getDatabase()
+  set(ref(db, 'users/' + userId + '/relays/'), {
+    relay1: 'hello',
+  })
+}
+
+export function GetDevices() {
+  const [isDevices, setIsDevices] = useState(null)
+  var userId = firebase.auth().currentUser.uid
   firebase
     .database()
-    .ref('relayStatus')
-    .update({
-      relayStatus1: flag,
+    .ref('users/' + userId + '/devices')
+    .on('value', function (snapshot) {
+      const data = snapshot.val()
+      if (data != isDevices) {
+        setIsDevices(data)
+      }
     })
-    .then(() => console.log(flag))
-  if (flag == '0') {
-    flag = '1'
-  } else {
-    console.log('hi')
-    flag = '0'
-  }
+  console.log(isDevices)
+  return isDevices
 }
