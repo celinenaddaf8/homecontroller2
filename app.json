@@ -3,7 +3,6 @@
     "name": "home-controller",
     "slug": "home-controller",
     "version": "1.0.0",
-    "sdkVersion": "42.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -11,6 +10,15 @@
       "resizeMode": "contain",
       "backgroundColor": "#FFFFFF"
     },
+    "plugins": [
+    [
+      "@react-native-voice/voice",
+      {
+        "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+        "speechRecogntionPermission": "Allow $(PRODUCT_NAME) to securely recognize user speech"
+      }
+    ]
+  ],
     "packagerOpts": {
       "sourceExts": ["js", "ts", "tsx", "jsx"]
     },
@@ -27,5 +35,6 @@
         "backgroundColor": "#000000"
       }
     }
-  }
+    
+}
 }

@@ -11,7 +11,7 @@ const Container = styled.View`
   height: 80%;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
 `
 
 const StyledCard = styled.View`

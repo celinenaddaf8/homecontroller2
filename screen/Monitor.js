@@ -6,6 +6,8 @@ import firebase from 'firebase'
 import { useNavigation } from '@react-navigation/native'
 import Header from '../components/Header'
 import { useEffect, useState } from 'react'
+import VoiceOrder from '../components/voice'
+
 const BigContainer = styled.View`
   height: 100%;
   width: 100%;
@@ -19,7 +21,17 @@ const Container = styled.View`
   background-color: white;
   flex-direction: column;
 `
-
+const VoiceOrderButton = styled.TouchableOpacity`
+  width: 95%;
+  height: 50px;
+  color: white;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background-color: #f4a460;
+  border-radius: 15px;
+`;
 const TitleText = styled.Text`
   margin-top: 5%;
   color: gray;
@@ -90,7 +102,6 @@ const Monitor = () => {
       .ref('users/' + userId + '/mainSensor')
       .on('value', function (snapchot) {
         const data = snapchot.val()
-        console.log('this is the data ' + data)
         setNumber(data)
         return number
       })
@@ -98,7 +109,7 @@ const Monitor = () => {
 
   useEffect(() => {
     FetchData()
-  }, [])
+  }, [number])
   return (
     <BigContainer>
       <Container>
@@ -106,46 +117,49 @@ const Monitor = () => {
         <Header />
         <TouchableOpacity
           onPress={() => {
-            signOutUser(navigation)
+            signOutUser(navigation);
           }}
         >
-          <Text style={{ color: '#808080' }}>Log Out</Text>
+          <Text style={{ color: "#808080" }}>Log Out</Text>
         </TouchableOpacity>
         <Line></Line>
-        <TitleText>{number < 0 ? 0 : number} A</TitleText>
+        <TitleText>5 A</TitleText>
         <ImagesContainer>
           <AppButton
             number="1"
             roomName="Kitchen"
             onPress="Kitchen"
-            uri={'https://www.linkpicture.com/q/kitchennn.png'}
+            uri={"https://www.linkpicture.com/q/kitchennn.png"}
             navigation={navigation}
           />
           <AppButton
             number="2"
             roomName="Bathroom"
             onPress="Bathroom"
-            uri={'https://www.linkpicture.com/q/bathroomnew.png'}
+            uri={"https://www.linkpicture.com/q/bathroomnew.png"}
             navigation={navigation}
           />
           <AppButton
             number="3"
             roomName="Bedroom"
             onPress="Bedroom"
-            uri={'https://www.linkpicture.com/q/bedroomnew1.png'}
+            uri={"https://www.linkpicture.com/q/bedroomnew1.png"}
             navigation={navigation}
           />
           <AppButton
             number="4"
             roomName="Living Room"
             onPress="Living Room"
-            uri={'https://www.linkpicture.com/q/livinggroom.png'}
+            uri={"https://www.linkpicture.com/q/livinggroom.png"}
             navigation={navigation}
           />
         </ImagesContainer>
+        <VoiceOrderButton
+          onPress={() => navigation.navigate("VoiceOrder")}
+        ></VoiceOrderButton>
       </Container>
     </BigContainer>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

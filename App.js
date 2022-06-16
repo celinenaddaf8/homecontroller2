@@ -18,6 +18,7 @@ import Room from './screen/Room'
 import Device from './screen/Device'
 import EditDevice from './screen/EditDevice'
 import AddDevice from './screen/AddDevice'
+import VoiceOrder from './components/voice'
 LogBox.ignoreLogs(['Warning: ...'])
 LogBox.ignoreAllLogs()
 
@@ -67,6 +68,7 @@ const App = () => {
           <Stack.Screen name="Device" component={Device} />
           <Stack.Screen name="Edit" component={EditDevice} />
           <Stack.Screen name="Add" component={AddDevice} />
+          <Stack.Screen name="VoiceOrder" component={VoiceOrder} />
         </Stack.Navigator>
       </KeyboardAvoidingView>
     </NavigationContainer>
